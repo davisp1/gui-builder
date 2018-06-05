@@ -1,0 +1,10 @@
+# Repository list to use
+#
+# Format:
+# -------
+#
+# - url: git_repository_url     # local path are allowed. Use https://login:password@url if repository is private
+#   ref: git_reference          # can be a branch, a sha1 or a tag
+#
+- url: https://github.com/IKATS/vt-metadata.git
+  ref: master
