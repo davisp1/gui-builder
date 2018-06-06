@@ -15,17 +15,19 @@ RUN apt-get update \
 
 WORKDIR /app
 
-# Adding assets
+# Creating app directories
 RUN mkdir -p  /app/src /app/build /app/fetch-vt /app/local
+
+# Install node dependencies
+ADD assets/package.json /app/
+RUN npm install
+
+# Adding other assets
 ADD src /app/src
 ADD assets/entry_point.sh /app/
 ADD assets/gulpfile.js /app/
 ADD assets/main.py /app/
-ADD assets/package.json /app/
 ADD assets/repo-list.yml /app/
-
-# Install node dependencies
-RUN npm install
 
 VOLUME /app/build
 VOLUME /app/fetch-vt

@@ -18,8 +18,10 @@
   "devDependencies": {
     "glob": "^7.1.2",
     "gulp": "^3.9.1",
-    "gulp-clean": "^0.3.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-replace": "^1.0.0",
     "gulp-inject": "^4.3.2",
+    "gulp-util": "^3.0.8",
     "merge-stream": "^1.0.1"
   }
 }

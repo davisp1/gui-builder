@@ -12,3 +12,10 @@ gulp prepare
 
 # Modify sources to integrate viztools
 gulp build
+
+gulp \
+    --tomee=${TOMEE_ADDR} \
+    --tomcat=${TOMCAT_ADDR} \
+    --gunicorn=${GUNICORN_ADDR} \
+    --opentsdb=${OPENTSDB_ADDR} \
+set-api-endpoints

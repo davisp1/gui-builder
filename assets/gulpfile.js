@@ -1,7 +1,9 @@
 var gulp = require('gulp'),
+  gutil = require('gulp-util'),
   inject = require('gulp-inject'),
   merge = require('merge-stream'),
   clean = require('gulp-clean'),
+  replace = require('gulp-replace'),
   glob = require("glob");
 
 // built GUI folder location
@@ -10,6 +12,15 @@ var destination = 'build';
 // Viztools folder location relative to build path
 var VTPATH = 'viztools'
 
+// Update API endpoints
+gulp.task("set-api-endpoints", function () {
+  return gulp.src(`${destination}/js/ikats_api.js`)
+    .pipe(replace(/ikats\.constants\.tomee_addr = .*;/, `ikats.constants.tomee_addr = "${gutil.env.tomee}";`))
+    .pipe(replace(/ikats\.constants\.gunicorn_addr = .*;/, `ikats.constants.gunicorn_addr = "${gutil.env.gunicorn}";`))
+    .pipe(replace(/ikats\.constants\.tomcat_addr = .*;/, `ikats.constants.tomcat_addr = "${gutil.env.tomcat}";`))
+    .pipe(replace(/ikats\.constants\.opentsdb_addr = .*;/, `ikats.constants.opentsdb_addr = "${gutil.env.opentsdb}";`))
+    .pipe(gulp.dest(`${destination}/js/`));
+});
 
 // Clean former run
 gulp.task("clean", function () {
@@ -77,7 +88,7 @@ gulp.task('prepare', function () {
 });
 
 // Task aliases
-gulp.task("default", ['clean', 'prepare', 'build']);
+gulp.task("default", ['clean', 'prepare', 'build', 'set-api-endpoints']);
 
 // Watch sources changes and trigger the build again
 gulp.task("watch", function () {
