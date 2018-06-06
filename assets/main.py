@@ -59,12 +59,22 @@ def check_vt_validity(vt_name):
     """
 
     # Check if viztool definition is present in repository
-    pattern = re.compile("viztool_def(_[0-9]{,2})?.json")
+    pattern_def = re.compile("viztool_def.json")
+    def_found = False
+    pattern_manifest = re.compile("manifest.json")
+    manifest_found = False
     for file_path in os.listdir("%s/vt-%s" % (FETCH_VT_PATH, vt_name)):
-        if pattern.match(file_path):
+        if pattern_def.match(file_path):
+            def_found = True
+        if pattern_manifest.match(file_path):
+            manifest_found = True
+        if def_found and manifest_found:
             break
     else:
-        LOGGER.warning("[%s] No catalog file found.", vt_name)
+        if not def_found:
+            LOGGER.warning("[%s] viztool_def.json is missing", vt_name)
+        if not manifest_found:
+            LOGGER.warning("[%s] manifest.json is missing", vt_name)
 
 
 
@@ -79,7 +89,7 @@ def fetch_repo(repository_info):
     reference = repository_info.get('ref', 'master')
     extract_to_path = "%s/vt-%s" % (FETCH_VT_PATH, vt_name)
     commit_ref = "no_info"
-    LOGGER.debug("\n[%s] Processing ...", vt_name)
+    LOGGER.debug("[%s] Processing ...", vt_name)
 
     if url[0] == "/":
         # Repository is a local path
@@ -144,7 +154,7 @@ def fetch_repo(repository_info):
     ignored = shutil.ignore_patterns(*ignored_patterns)
     shutil.rmtree("%s/%s" % (VT_PATH, vt_name),
                   ignore_errors=True)
-    shutil.copytree("%s/vt-%s/%s" % (FETCH_VT_PATH, vt_name, vt_name),
+    shutil.copytree("%s/vt-%s" % (FETCH_VT_PATH, vt_name),
                     "%s/%s" % (VT_PATH, vt_name),
                     ignore=ignored)
     if os.path.exists("%s/vt-%s/LICENSE" % (FETCH_VT_PATH, vt_name)):
