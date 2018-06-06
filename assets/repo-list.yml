@@ -6,5 +6,35 @@
 # - url: git_repository_url     # local path are allowed. Use https://login:password@url if repository is private
 #   ref: git_reference          # can be a branch, a sha1 or a tag
 #
-- url: https://github.com/IKATS/vt-metadata.git
-  ref: master
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-cluster.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-correl-loop.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-curve.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-metadata.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-metadata-list.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-non-temporal-curve.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-pattern.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-percent.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-random-projection.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-raw.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-sax.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-scatter-plot-ts.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-table.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-text.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-ts-table.git
+  ref: feature/173031
+- url: https://tuleap-poc.si.c-s.fr/plugins/git/ikats-ops/vt-tsuid.git
+  ref: feature/173031

@@ -6,6 +6,9 @@ var gulp = require('gulp'),
   replace = require('gulp-replace'),
   glob = require("glob");
 
+// Viztools sources folder location
+var vtSources = 'fetch-vt';
+
 // built GUI folder location
 var destination = 'build';
 
@@ -38,7 +41,7 @@ gulp.task('build', function () {
 
   // Get a list of JS files to include
   var jsToInclude = [];
-  glob.sync('./fetch-vt/**/manifest.json').forEach(
+  glob.sync(`./${vtSources}/**/manifest.json`).forEach(
     function (file) {
       var f = require(file);
       if (f.css) {
@@ -55,23 +58,24 @@ gulp.task('build', function () {
     /* Update index.html with new JS & CSS */
     gulp.src('src/index.html')
       .pipe(inject(gulp.src(jsToInclude, {
-        read: false,
+        read: false
       }), {
           starttag: '<!-- inject:{{ext}} -->',
           relative: true,
+          ignorePath: `../${destination}/`
         }))
       .pipe(gulp.dest(destination)),
 
     /* Update VizToolsLibrary.js with new viztools */
     gulp.src('src/js/VizModule/VizToolsLibrary.js')
-      .pipe(inject(gulp.src(`${destination}/${VTPATH}/**/viztool_def.json`), {
-        starttag: '// inject:json',
-        endtag: '// endinject',
+      .pipe(inject(gulp.src(`${vtSources}/**/viztool_def.json`), {
+        starttag: '/* inject:json */',
+        endtag: '/* endinject */',
         transform: function (filepath, file) {
           return file.contents.toString('utf8') + ',';
         }
       }))
-      .pipe(gulp.dest(`${destination}/js/VizModule/'`))
+      .pipe(gulp.dest(`${destination}/js/VizModule/`))
 
   );
 });
@@ -83,7 +87,7 @@ gulp.task('prepare', function () {
     gulp.src(['./src/**/*']).pipe(gulp.dest(destination)),
 
     /* Copy all Viztools to build folder */
-    gulp.src(['./fetch-vt/**']).pipe(gulp.dest(`${destination}/${VTPATH}/`))
+    gulp.src([`./${vtSources}/**`]).pipe(gulp.dest(`${destination}/${VTPATH}/`))
   );
 });
 

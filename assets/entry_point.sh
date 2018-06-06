@@ -13,6 +13,7 @@ gulp prepare
 # Modify sources to integrate viztools
 gulp build
 
+# Update API endpoints
 gulp \
     --tomee=${TOMEE_ADDR} \
     --tomcat=${TOMCAT_ADDR} \

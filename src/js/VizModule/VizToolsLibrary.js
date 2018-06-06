@@ -29,7 +29,6 @@
  * @type {Array}
  */
 VizToolsLibrary = [
-    // Contributions
-    // inject:json
-    // endinject
+/* inject:json */
+/* endinject */
 ];
