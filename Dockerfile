@@ -1,6 +1,6 @@
 FROM node:9.11.1-jessie
 
-# Adding backport for python3-git
+# Adding jessie backport for python3-git
 RUN echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/backport.list
 
 # Install dependencies
@@ -18,11 +18,11 @@ WORKDIR /app
 # Adding assets
 RUN mkdir -p  /app/src /app/build /app/fetch-vt /app/local
 ADD src /app/src
-ADD assets/main.py /app/
-ADD assets/repo-list.yml /app/
 ADD assets/entry_point.sh /app/
 ADD assets/gulpfile.js /app/
+ADD assets/main.py /app/
 ADD assets/package.json /app/
+ADD assets/repo-list.yml /app/
 
 # Install node dependencies
 RUN npm install
@@ -31,6 +31,9 @@ VOLUME /app/build
 VOLUME /app/fetch-vt
 VOLUME /app/src
 VOLUME /app/local
+
+# Do git clone no matter the validity of the certificate
+ENV GIT_SSL_NO_VERIFY true
 
 # Starting component
 CMD bash ./entry_point.sh
