@@ -13,7 +13,7 @@ var VTPATH = 'viztools'
 
 // Clean former run
 gulp.task("clean", function () {
-  return gulp.src(destination, {
+  return gulp.src(`${destination}/*`, {
     read: false
   })
     .pipe(clean());
