@@ -1,0 +1,56 @@
+.toggle-switch {
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid;
+    border-color: #cccccc;
+    position: relative;
+    text-align: left;
+    overflow: hidden;
+    line-height: 8px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.toggle-switch .knob {
+    color: #ffffff;
+    background: #ffffff;
+    border: 3px;
+    border-left: solid;
+    border-right:solid;
+    border-color:#999999;
+}
+
+.toggle-switch .switch-left {
+    color: #428bca;
+    background: #428bca;
+}
+
+.toggle-switch .switch-right {
+    color: #eeeeee;
+    background: #eeeeee;
+}
+
+
+.toggletextvisible .switch-left{
+    padding-top:0px;
+    color: #eeeeee;
+    background: #428bca;
+}
+
+.toggletextvisible .switch-right{
+    padding-top:0px;
+    color: #428bca;
+    background: #eeeeee;
+}
+
+.toggletextvisible{
+    width:50px;
+    height:22px;
+}
+

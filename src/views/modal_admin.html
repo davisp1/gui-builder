@@ -1,0 +1,150 @@
+<!--
+  Copyright 2018 CS Systèmes d'Information
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- adminModal -->
+<div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="adminModalTitle">
+    <div class="modal-dialog modal-lg" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="adminModalTitle">Data Management</h4>
+            </div>
+            <div class="modal-body">
+                <div ng-if="wfCtrl.admin.visiblePanel==='dataset'">
+                    <h1>Delete a Dataset <span class="badge">{{wfCtrl.admin.dataset.data.length}}</span></h1>
+                    <div class="alert-danger"><strong>DANGER ZONE</strong> No confirmation is required for the actions
+                        below
+                    </div>
+
+                    <div class="table-responsive" ng-if="wfCtrl.admin.dataset.originalData == null">
+                        <img src="icons/loading.gif" alt="loading"/> Getting Dataset list ...
+                    </div>
+                    <div class="table-responsive" ng-if="wfCtrl.admin.dataset.originalData != null">
+
+                        <!-- search box -->
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="admin_query_dataset">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </span>
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Search dataset ..."
+                                   aria-describedby="admin_query_dataset"
+                                   ng-model="wfCtrl.admin.dataset.query"
+                                   ng-change="wfCtrl.admin.dataset.filtered_data = wfCtrl.admin.dataset.filter()"/>
+                        </div>
+
+                        <div class="table-responsive" ng-if="wfCtrl.admin.dataset.data.length == 0">
+                            <span class="glyphicon glyphicon-question-sign"></span> No dataset found
+                        </div>
+                        <div class="table-responsive"
+                             ng-if="wfCtrl.admin.dataset.data.length != 0"
+                             style="max-height:500px; overflow: auto">
+
+                            <table class="table table-hover table-condensed"
+                             style="max-height:500px; overflow: auto">
+                                <tr>
+                                    <th class="col-md-10">Name</th>
+                                    <th class="col-md-2">Actions</th>
+                                </tr>
+                                <tr ng-repeat="item in wfCtrl.admin.dataset.data | orderBy : 'name'">
+                                    <td class="col-md-10">
+                                        {{item.name}} <span class="badge">{{item.count}}</span><br/>
+                                        <small class="text-muted">{{item.desc}}</small>
+                                    </td>
+                                    </td>
+                                    <td class="col-md-2">
+                                        <button type="button"
+                                                ng-click="wfCtrl.admin.dataset.del(item.name, false)"
+                                                class="btn btn-sm btn-primary"
+                                                title="Delete dataset reference ONLY (Associated timeseries will remain)">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                        <button type="button" ng-click="wfCtrl.admin.dataset.del(item.name, true)"
+                                                class="btn btn-sm btn-danger"
+                                                title="Delete dataset AND associated timeseries">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="wfCtrl.admin.visiblePanel==='table'">
+                    <h1>Delete a Table <span class="badge">{{wfCtrl.admin.table.data.length}}</span></h1>
+                    <div class="alert-danger"><strong>DANGER ZONE</strong> No confirmation is required for the actions
+                        below
+                    </div>
+                    <div class="table-responsive" ng-if="wfCtrl.admin.table.originalData == null">
+                        <img src="icons/loading.gif" alt="loading"/> Getting Table list ...
+                    </div>
+                    <div class="table-responsive" ng-if="wfCtrl.admin.table.originalData != null">
+
+                        <!-- search box -->
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="admin_query_table">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </span>
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Search table ..."
+                                   aria-describedby="admin_query_table"
+                                   ng-model="wfCtrl.admin.table.query"
+                                   ng-change="wfCtrl.admin.table.filtered_data = wfCtrl.admin.table.filter()"/>
+                        </div>
+
+                        <div class="table-responsive" ng-if="wfCtrl.admin.table.data.length == 0">
+                            <span class="glyphicon glyphicon-question-sign"></span> No table found
+                        </div>
+                        <div class="table-responsive"
+                             ng-if="wfCtrl.admin.table.data.length != 0"
+                             style="max-height:500px; overflow: auto">
+
+                            <table class="table table-hover table-condensed"
+                             style="max-height:500px; overflow: auto">
+                                <tr>
+                                    <th class="col-md-8">Name</th>
+                                    <th class="col-md-2">Created on</th>
+                                    <th class="col-md-2">Actions</th>
+                                </tr>
+                                <tr ng-repeat="item in wfCtrl.admin.table.data | orderBy : 'name'">
+                                    <td class="col-md-8">
+                                        <span title='table name'> {{item.name}}</span>
+                                        <small ng-if="item.description" title='table description' class="text-muted">
+                                            <br/>{{item.description}}
+                                        </small>
+                                    </td>
+                                    <td class="col-md-2">
+                                        <small class="text-muted">{{item.created | date:'yyyy-MM-dd HH:mm'}}</small>
+                                    </td>
+                                    <td class="col-md-2">
+                                        <button type="button"
+                                                ng-click="wfCtrl.admin.table.del(item.name, false)"
+                                                class="btn btn-sm btn-primary"
+                                                title="Delete table">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

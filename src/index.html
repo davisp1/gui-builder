@@ -1,0 +1,619 @@
+<!--
+  Copyright 2018 CS Systèmes d'Information
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html>
+
+<head>
+    <title>Ikats</title>
+    <link rel="icon" type="image/png" href="icons/ikats_logo.png"/>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/ui-tree/angular-ui-tree.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/toggle-switch/angular-toggle-switch.css">
+    <link rel="stylesheet" type="text/css" href="lib/toggle-switch/angular-toggle-switch-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="lib/datepicker/angular-datepicker.css">
+    <link rel="stylesheet" type="text/css" href="lib/angular-toastr/angular-toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/d3-context-menu/css/d3-context-menu.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link rel="stylesheet" type="text/css" href="css/ikats.css">
+    <!-- Contributions CSS -->
+    <!-- inject:css -->
+    <!-- endinject -->
+</head>
+<body id="body"
+      ng-app="ikatsapp"
+      ng-strict-di
+      ng-controller="WorkflowController as wfCtrl"
+      mouse-capture
+      ng-keydown="wfCtrl.keyDown($event)"
+      ng-keyup="wfCtrl.keyUp($event)"
+      style="background-color: rgba(231, 231, 231, 0.55);"
+      ng-click="wfCtrl.demo.displayDot($event)">
+<div class="wrap" ng-controller="CatalogController as catalogCtrl" style="height:100%;">
+
+<span ng-controller="VizController as vizCtrl">
+        <!-- Fixed navbar -->
+        <div class="navbar navbar-default navbar-fixed-top"
+             ng-click="wfCtrl.demo.displayDot($event)">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#" style="margin-top: -10px;">
+                        <img class="ikats_logo" src="icons/ikats_logo.png" ng-init="wfCtrl.debug=false"
+                             ng-dblclick='wfCtrl.debug = !wfCtrl.debug;wfCtrl.demo.activated = !wfCtrl.demo.activated;'/>
+                        Ikats
+                    </a>
+                </div>
+
+                <!-- Top Horizontal bar -->
+
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="divider"></li>
+
+                        <li class="dropdown">
+                           <a href="#"
+                              class="dropdown-toggle"
+                              data-toggle="dropdown"
+                              role="button"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                              title="Open Workflow panel">
+                               <span class="glyphicon glyphicon-modal-window"></span> Workflow Mgt
+                               <span class="caret"></span>
+                           </a>
+                           <ul class="dropdown-menu">
+                              <li>
+                                 <a href="#"
+                                    ng-click="wfCtrl.clear(catalogCtrl);vizCtrl.resetVizStates();vizCtrl.expanded=false;">
+                                     <span class="glyphicon glyphicon-file"></span> New</a>
+                              </li>
+                              <li>
+                                 <a href="#"
+                                    data-toggle="modal"
+                                    data-target="#wfLoadModal"
+                                    ng-click="wfCtrl.list()">
+                                     <span class="glyphicon glyphicon-folder-open"></span> Open</a>
+                              </li>
+                              <li>
+                                 <a href="#"
+                                    data-toggle="modal"
+                                    data-target="#wfSaveModal">
+                                     <span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                              </li>
+                           </ul>
+                        </li>
+
+                        <li class="divider"></li>
+                        <li class="dropdown">
+                          <a href="#"
+                             class="dropdown-toggle"
+                             data-toggle="dropdown"
+                             role="button"
+                             aria-haspopup="true"
+                             aria-expanded="false"
+                             title="Open Administration panel"><span
+                                  class="glyphicon glyphicon-oil"></span> Data Mgt <span class="caret"></span>
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a href="#"
+                                   data-toggle="modal"
+                                   data-target="#adminModal"
+                                   ng-click="wfCtrl.admin.dataset.init()">Datasets</a></li>
+                            <li><a href="#"
+                                   data-toggle="modal"
+                                   data-target="#adminModal"
+                                   ng-click="wfCtrl.admin.table.init()">Tables</a></li>
+                          </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a target="_blank" href="https://www.ikats.org"><span
+                                class="glyphicon glyphicon-question-sign"></span> Help</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <!-- Content (everything under navbar and upper footer) goes here -->
+        <div class="container-fluid" ng-controller="MacroOpController as moCtrl">
+
+            <!-- wfSaveModal -->
+            <div ng-include="'views/modal_workflow_save.html'"></div>
+
+            <!-- wfDelModal -->
+            <div ng-include="'views/modal_workflow_delete.html'"></div>
+
+            <!-- macroSaveModal -->
+            <div ng-include="'views/modal_macro_save.html'"></div>
+
+            <!-- macroDelModal -->
+            <div ng-include="'views/modal_macro_delete.html'"></div>
+
+            <!-- Left-Window -->
+            <div id="left-window" class="col-xs-2 left-window" style="background-color: rgba(233, 233, 233, 1);min-width:200px"
+                 ng-init="wfCtrl.init(catalogCtrl)">
+                <div id="left-window-content" class="left-window-content">
+
+                    <div class="titlebox">
+                        <h2 class="title">Operators</h2>
+                    </div>
+                    <!-- Operator Library -->
+                    <div class="op_library">
+
+
+                        <!-- search box -->
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="basic-addon1">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </span>
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Search operators ..."
+                                   aria-describedby="basic-addon1"
+                                   ng-model="catalogCtrl.tree_search_pattern"
+                                   ng-change="catalogCtrl.tree_search_results = catalogCtrl.searchBoxFilter()"/>
+                        </div>
+                        <br/>
+
+                        <!-- No result display -->
+                        <div ng-if="catalogCtrl.tree_search_results.length == 0 && catalogCtrl.tree_search_pattern != ''">
+                            <span class="text-danger">No results matching search criteria</span>
+                        </div>
+
+                        <!-- Search box results area -->
+                        <div ng-if="catalogCtrl.tree_search_results.length > 0">
+                            <div ui-tree style="margin-left: 10px;" id="tree-root1" data-nodrag
+                                 data-nodrop-enabled="true">
+                                <ol ui-tree-nodes data-nodrop-enabled ng-model="catalogCtrl.tree_search_results">
+                                    <li ng-repeat="node in catalogCtrl.tree_search_results | orderBy : 'label'"
+                                        ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- Rendering Nodes and Categories -->
+                        <script type="text/ng-template" id="nodes_renderer.html">
+
+                            <!-- Category -->
+                            <div ui-tree-handle
+                                 ng-if="node.category"
+                                 data-nodrag
+                                 ng-click="toggle(this)"
+                                 class="tree-node tree-node-content category"
+                                 tooltip-placement="right"
+                                 tooltip-append-to-body="true"
+                                 uib-tooltip="{{node.desc}}">
+                                <div class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0">
+                                   <span class="glyphicon" style="font-size: 7px;padding: 0px 0px 2px;"
+                                         ng-class="{'glyphicon-chevron-right': collapsed,'glyphicon-chevron-down': !collapsed}">
+                                   </span>
+                                </div>
+                                {{node.name}}
+                            </div>
+
+                            <!-- Draggable Node -->
+                            <div ui-tree-handle
+                                 ng-if="!node.category"
+                                 class="tree-node tree-node-content"
+                                 ng-attr-data-drag="true"
+                                 data-jqyoui-options="{helper: 'clone', revert: 'invalid', appendTo: 'body'}"
+                                 jqyoui-draggable="{placeholder:'keep'}" ng-model="node" tooltip-placement="right"
+                                 tooltip-append-to-body="true"
+                                 uib-tooltip="{{node.desc}}">
+                                <span>{{node.label}}</span>
+                                <br/>
+                                <small class="text-muted">{{node.algo}}</small>
+                            </div>
+
+                            <!-- The node is an operator, we can't append a child node to it -->
+                            <ol ng-if="!node.category" ui-tree-nodes data-nodrop-enabled="true" ng-model="node.nodes"
+                                ng-class="{hidden: collapsed}">
+                                <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+                                </li>
+                            </ol>
+
+                            <!-- The node is a category, we can append a child node to it -->
+                            <ol ng-if="node.category" ui-tree-nodes ng-model="node.nodes"
+                                ng-class="{hidden: collapsed}">
+                                <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+                                </li>
+                            </ol>
+                        </script>
+
+                        <div class="row" ng-hide="catalogCtrl.tree_search_results.length">
+                            <div ui-tree id="tree-root2" style="margin-left: 10px;" data-nodrag
+                                 data-nodrop-enabled="true">
+                                <ol ui-tree-nodes ng-model="catalogCtrl.library">
+                                    <li ng-repeat="node in catalogCtrl.library" ui-tree-node
+                                        ng-include="'nodes_renderer.html'"></li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- Rendering custom-OPs and Macro-Ops -->
+                        <script type="text/ng-template" id="macro_renderer.html">
+
+                            <!-- Category -->
+                            <div ui-tree-handle
+                                 ng-if="node.category"
+                                 data-nodrag
+                                 ng-click="wfCtrl.toggle(this)"
+                                 class="tree-node tree-node-content category"
+                                 tooltip-placement="right"
+                                 uib-tooltip="{{macro.description}}" tooltip-append-to-body="true">
+                                <div class="btn btn-success btn-xs" ng-if="macro.macros && macro.macros.length > 0">
+                                   <span class="glyphicon" style="font-size: 7px;padding: 0px 0px 2px;"
+                                         ng-class="{'glyphicon-chevron-right': collapsed,'glyphicon-chevron-down': !collapsed}">
+                                   </span>
+                                </div>
+                                {{node.name}}
+                            </div>
+
+                            <!-- Draggable Node -->
+                            <div ui-tree-handle
+                                 ng-if="!macro.category"
+                                 class="tree-node tree-node-content"
+                                 ng-attr-data-drag="{{wfCtrl.customizing&&'false'||'true'}}"
+                                 data-jqyoui-options="{helper: 'clone', revert: 'invalid', appendTo: 'body'}"
+                                 jqyoui-draggable="{placeholder:'keep'}" ng-model="macro" tooltip-placement="right"
+                                 tooltip-append-to-body="true"
+                                 uib-tooltip="{{macro.description}}" style="overflow:hidden;">
+                                <div class="col-xs-10">
+                                    {{macro.name}}
+                                </div>
+                                <div class="col-xs-1">
+                                    <!--mo.del(macro.id)-->
+                                    <a data-toggle="modal" data-target="#macroDelModal"
+                                       ng-click="moCtrl.confirmDel(macro)"
+                                       class="btn btn-xs btn-danger" style="margin-top: 2px;">
+                                            <span class="glyphicon glyphicon-trash"
+                                                  style="font-size: 10px;padding: 0px 0px 2px;"></span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- The node is an operator, we can't append a child node to it -->
+                            <ol ng-if="!macro.category" ui-tree-nodes data-nodrop-enabled="true"
+                                ng-model="macro.macros">
+                                <li ng-repeat="macro in macro.macros" ui-tree-node ng-include="'macro_renderer.html'">
+                                </li>
+                            </ol>
+
+                            <!-- The node is a category, we can append a child node to it -->
+                            <ol ng-if="macro.category" ui-tree-nodes ng-model="macro.macros">
+                                <li ng-repeat="macro in macro.macros" ui-tree-node ng-include="'macro_renderer.html'">
+                                </li>
+                            </ol>
+                        </script>
+
+                        <div class="row" ng-init="moCtrl.list();" ng-hide="catalogCtrl.tree_search_results.length">
+                            <div ui-tree id="tree-root-3" style="margin-left: 10px;" data-nodrag
+                                 data-nodrop-enabled="true">
+                                <ol ui-tree-nodes ng-model="moCtrl.data">
+                                    <li ui-tree-node ng-repeat="mo_group in moCtrl.groups">
+                                        <div
+                                                ui-tree-handle
+                                                data-nodrag
+                                                ng-click="wfCtrl.toggle(this)"
+                                                class="tree-node tree-node-content category custom_op"
+                                                tooltip-placement="right"
+                                                tooltip-append-to-body="true"
+                                                uib-tooltip="Here you can find your Macros and custom Operators">
+                                            <div class="btn btn-success btn-xs">
+                                               <span class="glyphicon" style="font-size: 7px;padding: 0px 0px 2px;"
+                                                     ng-class="{'glyphicon-chevron-right': !collapsed,'glyphicon-chevron-down': collapsed}">
+                                               </span>
+                                            </div>
+                                            My Operators
+                                        </div>
+                                        <ol ui-tree-nodes ng-model="moCtrl.data" ng-class="{hidden: !collapsed}">
+                                            <li ng-repeat="macro in moCtrl.data" ui-tree-node
+                                                ng-include="'macro_renderer.html'"></li>
+                                        </ol>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="position:absolute;bottom:0px;"> <!-- Save as a custom OP/Macro OP -->
+                        <div class="col-xs-10">
+                            <label ng-style="wfCtrl.isDisabledStyle()"
+                                   style="padding-left: 30px;margin-top:10px;font-size:12px">Save
+                                selection as Custom Operator</label>
+                        </div>
+                        <div class="col-xs-2" style="padding-left: 0px;top: 20px;padding-right: 0px;">
+                            <div class="btn btn-xs btn-success"
+                                 ng-class="{disabled: !wfCtrl.isSelectionConsistent()}"
+                                 role="button"
+                                 ng-attr-data-toggle="{{wfCtrl.isSelectionConsistent() && 'modal' || undefined}}"
+                                 data-target="#macroSaveModal">
+                                <span class="glyphicon glyphicon-plus" style="top:0px;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="contentbox">
+
+                    <!-- viztoolDescModal -->
+                    <div ng-include="'views/modal_viztool_desc.html'"></div>
+
+                    <!-- wfLoadModal -->
+                    <div ng-include="'views/modal_workflow_load.html'"></div>
+
+                    <!-- adminModal -->
+                    <div ng-include="'views/modal_admin.html'"></div>
+
+                    <!-- Big-Content : visualization -->
+                    <div class="row">
+                        <div id="viz" class="slideable col-xs-9"
+                             style="box-shadow : 0px -2px 5px 1px rgba(0, 0, 0, 0.3);
+                             background-color:#fff;
+                             max-width: calc(100% - 333px);
+                             height:100%;
+                             max-height:100%;
+                             z-index:1;
+                             padding-left:30px;
+                             right:8px">
+                            <span class="btn btn-danger"
+                                  ng-click="vizCtrl.resetVizStates();vizCtrl.expanded=false;"
+                                  style="cursor:pointer;width:50px;position:absolute;right:0px;top:5px;">
+                                 <span class="glyphicon glyphicon-remove"></span>
+                            </span>
+                            <div ng-include="'views/visualisation.html'" style="height:100%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Big-Content : Flow-Chart -->
+                    <div class="row" id="flowchart">
+                        <div class="col-xs-12" style="right:5px;padding-right: 0px;" id="dropArea"
+                             ng-mousemove="wfCtrl.updateCoordinates($event)">
+                            <flow-chart
+                                    class="fullsize"
+                                    chart="wfCtrl.chartViewModel"
+                                    scale="wfCtrl.scale"
+                                    translate="wfCtrl.translate"
+                                    ng-click="wfCtrl.checkSelected($event)"
+                                    ng-dblclick="wfCtrl.checkDoubleSelected(vizCtrl)"
+                                    ng-mouseup="wfCtrl.checkSelected($event)"
+                                    wheel-listener
+                                    wheelup="wfCtrl.zoomIn()"
+                                    wheeldown="wfCtrl.zoomOut()"
+                                    style="background-color:#FFF;cursor:crosshair"
+                            >
+                            </flow-chart>
+                        </div>
+                        <!-- Screen to get data from drag and drop -->
+                        <div class="col-xs-10"
+                             jqyoui-droppable
+                             data-drop="true"
+                             ng-model='wfCtrl.toAddToWorkflow' style="position: fixed;
+                             float: right;
+                             z-index: -1;
+                             height: 100%;
+                             right: 0px;">
+                        </div>
+                    </div>
+                    <div class="col-xs-3" ng-show="!wfCtrl.focusedNode" ng-if="wfCtrl.debug">
+                        <h1>This is a glorious debug</h1>
+                        <textarea
+                                style="width:100%;height:70%;background-color: #222;color:lime;"
+                                chart-json-edit
+                                view-model="wfCtrl.chartViewModel">
+                        </textarea>
+                    </div>
+                    <div class="col-xs-3 scrollable" ng-show="wfCtrl.focusedNode"
+                         style="background-color: rgba(232, 232, 232, 0.90);height:100%;min-width:332px;padding: 0px 10px;box-shadow: -3px -1px 5px 0px rgba(0, 0, 0, 0.3);">
+
+                        {{wfCtrl.toAddToWorkflow}}
+                        <div class="titlebox">
+                            <h3 class="title">Parameters for {{wfCtrl.focusedNode.data.op_info.label}}</h3>
+                        </div>
+                        <div class="parameters">
+                            <div ng-repeat="parameter in wfCtrl.focusedNode.data.op_info.parameters">
+                                <hr/>
+                                <div class="row">
+                                    <!-- Parameter type : DS_LIST -->
+                                    <div ng-if="parameter.type==='ds_list'"
+                                         ng-include="'views/parameters/ds_list.html'"></div>
+                                    <!-- Parameter type : TS_selection -->
+                                    <div ng-if="parameter.type==='ts_selection'"
+                                         ng-include="'views/parameters/ts_selection.html'"></div>
+                                    <!-- Parameter type : TEXT -->
+                                    <div ng-if="parameter.type==='text'"
+                                         ng-include="'views/parameters/text.html'"></div>
+                                    <!-- Parameter type : NUMBER -->
+                                    <div ng-if="parameter.type==='number'"
+                                         ng-include="'views/parameters/number.html'"></div>
+                                    <!-- Parameter type : DATE -->
+                                    <div ng-if="parameter.type==='date'"
+                                         ng-include="'views/parameters/date.html'"></div>
+                                    <!-- Parameter type : LIST -->
+                                    <div ng-if="parameter.type==='list'"
+                                         ng-include="'views/parameters/list.html'"></div>
+                                    <!-- Parameter type : LIST_MULTIPLE -->
+                                    <div ng-if="parameter.type==='list_multiple'"
+                                         ng-include="'views/parameters/list_multiple.html'"></div>
+                                    <!-- Parameter type : BOOL -->
+                                    <div ng-if="parameter.type==='bool'"
+                                         ng-include="'views/parameters/bool.html'"></div>
+                                    <!-- Parameter type : FILE -->
+                                    <div ng-if="parameter.type==='file'"
+                                         ng-include="'views/parameters/file.html'"></div>
+                                    <!-- Parameter type : MD_FILTER -->
+                                    <div ng-if="parameter.type==='md_filter'"
+                                         ng-include="'views/parameters/md_filter.html'"></div>
+                                    <!-- Parameter type : TEXTAREA -->
+                                    <div ng-if="parameter.type==='textarea'"
+                                         ng-include="'views/parameters/textarea.html'"></div>
+                                    <!-- Parameter type : HIDDEN -->
+                                    <div class="hide" ng-if="parameter.type==='hidden'"
+                                         ng-include="'views/parameters/hidden.html'"></div>
+                                </div>
+                            </div>
+
+                            <hr/>
+                            <button ng-hide="wfCtrl.focusedNode.data.op_info.isRunning()"
+                                    class="btn btn-xs btn-warning" ng-click="wfCtrl.runOnce()">
+                                <span class="glyphicon glyphicon-play"></span>
+                                Run
+                            </button>
+                            <div>
+                                <br/>
+                                <div class="row" title="Server time"
+                                     ng-show="wfCtrl.focusedNode.data.op_info.lastStart">
+                                    <div class="col-xs-3 parameterName">Started at</div>
+                                    <div class="col-xs-8">
+                                        {{wfCtrl.focusedNode.data.op_info.lastStart *1000 | date : "yyyy-MM-dd HH:mm:ss"}}
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="wfCtrl.focusedNode.data.op_info.duration">
+                                    <div class="col-xs-3 parameterName">Duration</div>
+                                    <div class="col-xs-8">
+                                        {{wfCtrl.focusedNode.data.op_info.duration * 1000 | ms2hms}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="wfCtrl.debug">
+                                <label>Debug</label>
+                                <button class="btn btn-xs btn-warning"
+                                        ng-click="wfCtrl.focusedNode.data.op_info.init()">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                    Init
+                                </button>
+                                <pre class="bg-warning">
+                                    {{wfCtrl.focusedNode.data.op_info.debug()| json : 2}}
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer text-center text-muted">
+                    <span style="float:left"><a href="versions.txt" target="_blank">Version</a></span>
+
+                    <span>&copy; Copyright <img src="icons/logo-cs.png" width="61px" height="20px"
+                                                alt="logo C-S"/> 2015-2016</span>
+                </div>
+            </div>
+        </div>
+</span>
+</div>
+
+<!-- Framework code. -->
+<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/angular.min.js" type="text/javascript"></script>
+<script src="js/angular-animate.min.js" type="text/javascript"></script>
+<script src="lib/lodash/lodash.js" type="text/javascript"></script>
+
+<!-- Contributions -->
+<!-- inject:lib:js -->
+<!-- endinject -->
+
+<!-- Ikats LIB -->
+<script src="js/config/ikats_conf.js" type="text/javascript"></script>
+<script src="js/ikats_lib.js" type="text/javascript"></script>
+<!-- Ikats API -->
+<script src="js/ikats_api.js" type="text/javascript"></script>
+
+<script src="js/ikats_core_op_lib.js" type="text/javascript"></script>
+<script src="js/ikats_node.js" type="text/javascript"></script>
+<script src="js/ikats_op.js" type="text/javascript"></script>
+
+<!-- Load VizModule -->
+<script src="js/VizModule/vizEngine.js" type="text/javascript"></script>
+<script src="js/VizModule/VizTool.js" type="text/javascript"></script>
+<!-- Load VizTools -->
+<script src="js/VizModule/VizToolsImplems/ClustersViz.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/SaxViz.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/RawViz.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/PercentViz.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/D3Curve.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/tstable.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/tsuidViz.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/mdEditViz.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/MDListViz.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/TextViz.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/ScatterPlotTS.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/patternViz.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/randomProjectionViz.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/CorrelLoop.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/D3CurveNonTemporal.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsImplems/Table.js" type="text/javascript"></script>
+
+<!-- Contributions -->
+<!-- inject:js -->
+<!-- endinject -->
+
+<!-- Instantiate Library -->
+<script src="js/VizModule/VizToolsLibrary.js" type="text/javascript"></script>
+<script src="js/VizModule/VizToolsDefault.js" type="text/javascript"></script>
+
+<!-- Flowchart code. -->
+<script src="lib/flowchart/svg_class.js" type="text/javascript"></script>
+<script src="lib/flowchart/mouse_capture_service.js" type="text/javascript"></script>
+<script src="lib/flowchart/dragging_service.js" type="text/javascript"></script>
+<script src="lib/flowchart/flowchart_viewmodel.js" type="text/javascript"></script>
+<script src="lib/flowchart/flowchart_directive.js" type="text/javascript"></script>
+
+<!-- D3 code -->
+<script src="js/d3.min.js" type="text/javascript"></script>
+<script src="lib/d3/d3.min.js" type="text/javascript"></script>
+<script src="lib/d3/d3-shape.v1.min.js"></script>
+
+
+<!-- d3-context-menu -->
+<script src="lib/d3-context-menu/js/d3-context-menu.js" type="text/javascript"></script>
+<!-- UI-Tree code. -->
+<script src="lib/ui-tree/angular-ui-tree.min.js" type="text/javascript"></script>
+<!-- UI-Bootstrap code -->
+<script src="lib/ui-bootstrap/ui-bootstrap.1.3.2.min.js" type="text/javascript"></script>
+<!-- Toggle-Switch code. -->
+<script src="lib/toggle-switch/angular-toggle-switch.min.js" type="text/javascript"></script>
+<!-- Datepicker code-->
+<script src="lib/datepicker/angular-datepicker.min.js" type="text/javascript"></script>
+<!-- Slideable code-->
+<script src="lib/slideable/angular-slideable.js" type="text/javascript"></script>
+<!-- DragDrop code-->
+<script src="lib/dragdrop/dragdrop.min.js" type="text/javascript"></script>
+<script src="lib/dragdrop/jquery-ui.min.js" type="text/javascript"></script>
+<!-- Angular-Toastr code -->
+<script src="lib/angular-toastr/angular-toastr.min.js" type="text/javascript"></script>
+
+<!-- App code. -->
+<script src="js/ikats_app.js" type="text/javascript"></script>
+<!-- Controllers -->
+<script src="js/controllers/catalogController.js" type="text/javascript"></script>
+<script src="js/controllers/macroOpController.js" type="text/javascript"></script>
+<script src="js/controllers/vizController.js" type="text/javascript"></script>
+<script src="js/controllers/workflowController.js" type="text/javascript"></script>
+<!-- Config -->
+<script src="js/config/toastr.js" type="text/javascript"></script>
+<script src="js/config/tree.js" type="text/javascript"></script>
+<!-- Filters -->
+<script src="js/filters/ms2hms.js" type="text/javascript"></script>
+<!-- Directives -->
+<script src="js/directives/wheelListener.js" type="text/javascript"></script>
+<script src="js/directives/fileRead.js" type="text/javascript"></script>
+
+</body>
+
+</html>
