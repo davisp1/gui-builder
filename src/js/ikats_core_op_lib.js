@@ -1479,7 +1479,7 @@ let _core_op_lib = [
         outputs: [
             {
                 name: "out",
-                label: "TS list",
+                label: "out",
                 type: 'ts_list'
             }
         ],
