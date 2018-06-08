@@ -481,12 +481,12 @@ let _core_op_lib = [
         inputs: [
             {
                 name: "TS_1",
-                label: "TS list 1",
+                label: "TS list",
                 type: "ts_list"
             },
             {
                 name: "TS_2",
-                label: "TS list 2",
+                label: "TS list",
                 type: "ts_list"
             }
         ],
@@ -1200,7 +1200,7 @@ let _core_op_lib = [
             },
             {
                 name: "dataset",
-                label: "Name",
+                label: "DSname",
                 type: "ds_name"
             },
             {
