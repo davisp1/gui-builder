@@ -92,7 +92,7 @@ let _core_op_lib = [
             },
             {
                 name: "Name",
-                label: "Name",
+                label: "DSname",
                 type: "ds_name"
             }
         ],
@@ -398,7 +398,7 @@ let _core_op_lib = [
             },
             {
                 name: "ds",
-                label: "DS name",
+                label: "DSname",
                 type: "ds_name"
             }
         ],
@@ -493,7 +493,7 @@ let _core_op_lib = [
         outputs: [
             {
                 name: "Merged",
-                label: "Merged TS list",
+                label: "TS list",
                 type: "ts_list"
             }
         ],
@@ -566,7 +566,7 @@ let _core_op_lib = [
         outputs: [
             {
                 name: "table",
-                label: "table",
+                label: "Table",
                 type: "table"
             }
         ],
@@ -790,7 +790,7 @@ let _core_op_lib = [
             },
             {
                 name: "ds",
-                label: "DS name",
+                label: "DSname",
                 type: "ds_name"
             }
         ],
@@ -905,8 +905,8 @@ let _core_op_lib = [
         parameters: [
             {
                 name: "name",
-                label: "name",
-                description: "Table name: is its unique identifier",
+                label: "Name",
+                description: "Table name: unique identifier",
                 type: "text",
                 default_value: null,
             }
@@ -1072,12 +1072,12 @@ let _core_op_lib = [
         inputs: [
             {
                 name: "table1",
-                label: "Table 1",
+                label: "Table",
                 type: "table"
             },
             {
                 name: "table2",
-                label: "Table 2",
+                label: "Table",
                 type: "table"
             }
         ],
@@ -1100,7 +1100,7 @@ let _core_op_lib = [
         outputs: [
             {
                 name: "outputTable",
-                label: "Table 3",
+                label: "Table",
                 type: "table"
             }
         ],
@@ -1362,8 +1362,8 @@ let _core_op_lib = [
                                         let msg = "unhandled error with ingest module";
                                         switch (r.xhr.status) {
                                             case 409:
-                                                // Session already in progress
-                                                msg = "The same session has been already run";
+                                                // The same session has been already run
+                                                msg = "Session already in progress";
                                                 break;
                                             case 503:
                                                 // Another import session is already in progress
@@ -1425,13 +1425,6 @@ let _core_op_lib = [
                 default_value: false,
             }
         ],
-        outputs: [
-            {
-                name: "summary",
-                label: "Log",
-                type: "text"
-            }
-        ],
         init: function () {
 
             const self = this;
@@ -1444,7 +1437,6 @@ let _core_op_lib = [
 
             const file = self.getParameter("file");
             const update = self.getParameter("update");
-            const log = self.getOutput("summary");
 
             if (file.filename === null || file.value === null) {
                 self.progress(100, OP_STATES.ko);
@@ -1462,19 +1454,16 @@ let _core_op_lib = [
                         if (is2xx(r.debug.status)) {
                             self.progress(100, OP_STATES.ok);
                             console.info(r.data);
-                            log.value = r.data;
                             notify().info(r.data);
                         }
                         else {
                             self.progress(100, OP_STATES.ko);
-                            log.value = r.debug.responseText;
                             console.error(r.debug.responseText);
                             notify().error(r.debug.responseText);
                         }
                     },
                     error: function (r) {
                         self.progress(100, OP_STATES.ko);
-                        log.value = r.debug.responseText;
                         console.error(r.debug.responseText);
                         notify().error(r.debug.responseText);
                     }
@@ -1490,7 +1479,7 @@ let _core_op_lib = [
         outputs: [
             {
                 name: "out",
-                label: "out",
+                label: "TS list",
                 type: 'ts_list'
             }
         ],
