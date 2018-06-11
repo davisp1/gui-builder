@@ -1,0 +1,54 @@
+<!--
+  Copyright 2018 CS Systèmes d'Information
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<div class="col-xs-3 parameterName">
+    {{parameter.label}}
+</div>
+<div class="col-xs-8">
+    <span ng-hide="parameter.dov !== null">
+        <img src="icons/loading.gif" alt="loading"/> Loading Datasets...
+    </span>
+    <div ng-if="parameter.dov.length === 0">
+        <span class="glyphicon glyphicon-question-sign"></span> No Datasets found
+    </div>
+    <div class="input-group"
+         ng-show="parameter.dov">
+        <span class="input-group-addon">
+            <div class="btn-link btn-xs">
+                <span class="glyphicon glyphicon-refresh"
+                      ng-click="wfCtrl.focusedNode.data.op_info.init()"
+                      title="Click to refresh the dataset list"></span>
+            </div>
+        </span>
+        <select class="form-control"
+                ng-model="parameter.value"
+                ng-options="item as item.name for item in parameter.dov"
+                ng-change="parameter.onEvent(wfCtrl.focusedNode.data)">
+        </select>
+    </div>
+    <div ng-if="parameter.value" style="margin-top:7px">
+        <span class="badge" ng-if="parameter.dov">{{parameter.value.count}} Time series</span>
+        <img ng-if="!parameter.dov" src="icons/loading.gif" alt="loading"/>
+        <br/>
+        <label>
+            Description :
+        </label><br/>
+        {{parameter.value.desc}}
+    </div>
+</div>
+<!-- Info hover-button for tooltyping parameter description -->
+<div class="col-xs-1 nopadding" tooltip-placement="left" uib-tooltip="{{parameter.desc}}">
+    <span class="glyphicon glyphicon-info-sign"></span>
+</div>
