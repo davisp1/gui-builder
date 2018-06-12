@@ -1,9 +1,12 @@
 {
+  "#Review#173031" : "le nom ne devrait il pas correspondre au nom du dépôt ?",
   "name": "viztool-fetcher",
+  "#Review#173031_1" : "plutôt version 0.7.40 ?",
   "version": "1.0.0",
   "description": "Ikats Viztools fetcher",
   "main": "index.js",
   "directories": {
+    "#Review#173031" : "ce repertoire n'existe pas",
     "test": "tests"
   },
   "scripts": {
@@ -11,10 +14,12 @@
   },
   "repository": {
     "type": "git",
+  "#Review#173031" : "ce dépôt n'existe pas",
     "url": "https://github.com/IKATS/viztool-fetcher.git"
   },
   "author": "CS",
   "license": "Apache-2.0",
+  "#Review#173031" : "version gulp-util ci dessous deprecated, upgrade possible ?",
   "devDependencies": {
     "glob": "^7.1.2",
     "gulp": "^3.9.1",

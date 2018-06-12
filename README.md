@@ -42,7 +42,7 @@ It is a [YAML](http://yaml.org/) file describing a list of the following informa
 
 1. **url**: the complete URL to the `git` repository.  
    This may be a:
-   - complete https URL (eg. `https://github.com/IKATS/op-quality_stats.git`)
+   - complete https URL (eg. `https://github.com/IKATS/vt-metadata.git`)
    - local path (see details below)
 
    If credentials must be provided, use the following format: `https://login:password@company.com/git_repo`
