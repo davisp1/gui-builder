@@ -1,0 +1,32 @@
+{
+  "esversion": 6,
+  "node": true,
+  "jquery": true,
+  "globals": {
+    "OP_STATES": true,
+    "OP_INFO": false,
+    "ikats": true,
+    "notify": false,
+    "angular": false,
+    "atob": false,
+    "cloneObj": false,
+    "connections": false,
+    "CORE_OPERATORS_LIB": true,
+    "document": false,
+    "File": false,
+    "filterInt": false,
+    "FormData": false,
+    "is2xx": false,
+    "isArray": false,
+    "isFunction": false,
+    "isIn": false,
+    "isNumber": false,
+    "isObject": false,
+    "nodeById": false,
+    "p": false,
+    "promise": false,
+    "result": false,
+    "$scope": false,
+    "window": false
+  }
+}

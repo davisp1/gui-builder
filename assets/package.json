@@ -1,25 +1,20 @@
 {
-  "#Review#173031" : "le nom ne devrait il pas correspondre au nom du dépôt ?",
-  "name": "viztool-fetcher",
-  "#Review#173031_1" : "plutôt version 0.7.40 ?",
+  "name": "gui-builder",
   "version": "1.0.0",
-  "description": "Ikats Viztools fetcher",
+  "description": "Ikats GUI builder",
   "main": "index.js",
   "directories": {
-    "#Review#173031" : "ce repertoire n'existe pas",
-    "test": "tests"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-  "#Review#173031" : "ce dépôt n'existe pas",
-    "url": "https://github.com/IKATS/viztool-fetcher.git"
+    "url": "https://github.com/IKATS/gui-builder.git"
   },
   "author": "CS",
   "license": "Apache-2.0",
-  "#Review#173031" : "version gulp-util ci dessous deprecated, upgrade possible ?",
   "devDependencies": {
     "glob": "^7.1.2",
     "gulp": "^3.9.1",
