@@ -398,7 +398,11 @@ let _core_op_lib = [
             },
             {
                 name: "ds",
+<<<<<<< HEAD
                 label: "DSname",
+=======
+                label: "DS name",
+>>>>>>> feature/173031
                 type: "ds_name"
             }
         ],
@@ -481,19 +485,31 @@ let _core_op_lib = [
         inputs: [
             {
                 name: "TS_1",
+<<<<<<< HEAD
                 label: "TS list",
+=======
+                label: "TS list 1",
+>>>>>>> feature/173031
                 type: "ts_list"
             },
             {
                 name: "TS_2",
+<<<<<<< HEAD
                 label: "TS list",
+=======
+                label: "TS list 2",
+>>>>>>> feature/173031
                 type: "ts_list"
             }
         ],
         outputs: [
             {
                 name: "Merged",
+<<<<<<< HEAD
                 label: "TS list",
+=======
+                label: "Merged TS list",
+>>>>>>> feature/173031
                 type: "ts_list"
             }
         ],
@@ -566,7 +582,11 @@ let _core_op_lib = [
         outputs: [
             {
                 name: "table",
+<<<<<<< HEAD
                 label: "Table",
+=======
+                label: "table",
+>>>>>>> feature/173031
                 type: "table"
             }
         ],
@@ -790,7 +810,11 @@ let _core_op_lib = [
             },
             {
                 name: "ds",
+<<<<<<< HEAD
                 label: "DSname",
+=======
+                label: "DS name",
+>>>>>>> feature/173031
                 type: "ds_name"
             }
         ],
@@ -905,8 +929,13 @@ let _core_op_lib = [
         parameters: [
             {
                 name: "name",
+<<<<<<< HEAD
                 label: "Name",
                 description: "Table name: unique identifier",
+=======
+                label: "name",
+                description: "Table name: is its unique identifier",
+>>>>>>> feature/173031
                 type: "text",
                 default_value: null,
             }
@@ -1072,12 +1101,20 @@ let _core_op_lib = [
         inputs: [
             {
                 name: "table1",
+<<<<<<< HEAD
                 label: "Table",
+=======
+                label: "Table 1",
+>>>>>>> feature/173031
                 type: "table"
             },
             {
                 name: "table2",
+<<<<<<< HEAD
                 label: "Table",
+=======
+                label: "Table 2",
+>>>>>>> feature/173031
                 type: "table"
             }
         ],
@@ -1100,7 +1137,11 @@ let _core_op_lib = [
         outputs: [
             {
                 name: "outputTable",
+<<<<<<< HEAD
                 label: "Table",
+=======
+                label: "Table 3",
+>>>>>>> feature/173031
                 type: "table"
             }
         ],
@@ -1200,7 +1241,11 @@ let _core_op_lib = [
             },
             {
                 name: "dataset",
+<<<<<<< HEAD
                 label: "DSname",
+=======
+                label: "Name",
+>>>>>>> feature/173031
                 type: "ds_name"
             },
             {
@@ -1362,8 +1407,13 @@ let _core_op_lib = [
                                         let msg = "unhandled error with ingest module";
                                         switch (r.xhr.status) {
                                             case 409:
+<<<<<<< HEAD
                                                 // The same session has been already run
                                                 msg = "Session already in progress";
+=======
+                                                // Session already in progress
+                                                msg = "The same session has been already run";
+>>>>>>> feature/173031
                                                 break;
                                             case 503:
                                                 // Another import session is already in progress
@@ -1425,6 +1475,16 @@ let _core_op_lib = [
                 default_value: false,
             }
         ],
+<<<<<<< HEAD
+=======
+        outputs: [
+            {
+                name: "summary",
+                label: "Log",
+                type: "text"
+            }
+        ],
+>>>>>>> feature/173031
         init: function () {
 
             const self = this;
@@ -1437,6 +1497,10 @@ let _core_op_lib = [
 
             const file = self.getParameter("file");
             const update = self.getParameter("update");
+<<<<<<< HEAD
+=======
+            const log = self.getOutput("summary");
+>>>>>>> feature/173031
 
             if (file.filename === null || file.value === null) {
                 self.progress(100, OP_STATES.ko);
@@ -1454,16 +1518,28 @@ let _core_op_lib = [
                         if (is2xx(r.debug.status)) {
                             self.progress(100, OP_STATES.ok);
                             console.info(r.data);
+<<<<<<< HEAD
+=======
+                            log.value = r.data;
+>>>>>>> feature/173031
                             notify().info(r.data);
                         }
                         else {
                             self.progress(100, OP_STATES.ko);
+<<<<<<< HEAD
+=======
+                            log.value = r.debug.responseText;
+>>>>>>> feature/173031
                             console.error(r.debug.responseText);
                             notify().error(r.debug.responseText);
                         }
                     },
                     error: function (r) {
                         self.progress(100, OP_STATES.ko);
+<<<<<<< HEAD
+=======
+                        log.value = r.debug.responseText;
+>>>>>>> feature/173031
                         console.error(r.debug.responseText);
                         notify().error(r.debug.responseText);
                     }

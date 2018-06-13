@@ -1,0 +1,6 @@
+src/lib/*
+src/js/jquery-3.2.1.min.js
+src/js/d3.min.js
+src/js/bootstrap.min.js
+src/js/angular.min.js
+src/js/angular-animate.min.js
