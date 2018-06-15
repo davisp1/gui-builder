@@ -1,6 +1,6 @@
 {
   "name": "gui-builder",
-  "version": "1.0.0",
+  "version": "0.8.0",
   "description": "Ikats GUI builder",
   "main": "index.js",
   "directories": {
