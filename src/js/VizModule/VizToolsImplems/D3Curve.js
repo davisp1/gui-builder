@@ -1560,4 +1560,3 @@ class D3Curve extends VizTool {
 
     }
 }
-
