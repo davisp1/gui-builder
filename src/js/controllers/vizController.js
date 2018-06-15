@@ -177,4 +177,3 @@ angular.module("ikatsapp.controllers").controller("VizController", ["toastr", "$
         }
     };
 }]);
-

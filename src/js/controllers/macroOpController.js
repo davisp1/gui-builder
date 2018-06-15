@@ -181,4 +181,3 @@ angular.module("ikatsapp.controllers").controller("MacroOpController", ["toastr"
     };
 
 }]);
-
