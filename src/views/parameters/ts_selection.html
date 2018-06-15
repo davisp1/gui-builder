@@ -1,0 +1,52 @@
+<!--
+  Copyright 2018 CS Systèmes d'Information
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<div class="col-xs-3 parameterName">
+    {{parameter.label}}<span class="badge" ng-if="parameter.dov">{{parameter.value.length}}</span>
+</div>
+<div class="col-xs-7" style="max-height: 250px;overflow-y: auto;overflow-x:hidden;width:90%;">
+    <span class="text-muted" ng-if="!parameter.dov">
+        No input data
+    </span>
+
+    <div ng-if="parameter.dov"
+         ng-init="ts_selection_max_size=100;">
+        <div>
+            <span>
+                <button class="btn-link"
+                        ng-click="parameter.value = parameter.dov;parameter.onEvent(wfCtrl.focusedNode.data)">
+                    Select All 
+                </button>
+                <button class="btn-link" ng-click="parameter.value = []; parameter.onEvent(wfCtrl.focusedNode.data)">
+                    Select None 
+                </button>
+
+            </span>
+            <select size="8" style="width:100%;"
+                    multiple ng-multiple="true"
+                    ng-model="parameter.value"
+                    ng-options="ts.funcId for ts in parameter.dov | orderBy : 'funcId' | limitTo : ts_selection_max_size"
+                    ng-change="parameter.onEvent(wfCtrl.focusedNode.data)">
+            </select>
+        </div>
+        <p ng-if="parameter.dov.length>ts_selection_max_size" style="color:red">
+            Only first 100 items are displayed
+        </p>
+    </div>
+</div>
+<!-- Info hover-button for tooltyping parameter description -->
+<div class="col-xs-1 nopadding" tooltip-placement="left" uib-tooltip="{{parameter.desc}}">
+    <span class="glyphicon glyphicon-info-sign"></span>
+</div>

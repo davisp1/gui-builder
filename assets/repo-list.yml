@@ -1,0 +1,40 @@
+# Repository list to use
+#
+# Format:
+# -------
+#
+# - url: git_repository_url     # local path are allowed. Use https://login:password@url if repository is private
+#   ref: git_reference          # can be a branch, a sha1 or a tag
+#
+- url: https://github.com/IKATS/vt-cluster.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-correl-loop.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-curve.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-metadata.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-metadata-list.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-non-temporal-curve.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-pattern.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-percent.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-random-projection.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-raw.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-sax.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-scatter-plot-ts.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-table.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-text.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-ts-table.git
+  ref: 0.8.0
+- url: https://github.com/IKATS/vt-tsuid.git
+  ref: 0.8.0

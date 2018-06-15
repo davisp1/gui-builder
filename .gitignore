@@ -1,0 +1,6 @@
+.vscode/
+.idea/
+assets/build
+assets/fetch-vt
+assets/src
+node_modules
