@@ -1,0 +1,86 @@
+IKATS
+Copyright 2017-2018 CS Systèmes d'Information
+
+This product includes software developed by
+CS Systèmes d'Information (http://www.c-s.fr/)
+
+
+=================================================
+Massachusetts Institute of Technology License
+http://opensource.org/licenses/MIT
+=================================================
+
+The following components are provided under Massachusetts Institute of Technology License:
+
+    angular (1.5.5)
+    https://github.com/angular/angular.js/blob/master/LICENSE
+
+    angular-animate (1.5.5)
+    https://www.npmjs.com/package/angular-animate
+
+    angular-datepicker (2.1.0)
+    https://github.com/720kb/angular-datepicker/
+
+    angular-dragdrop (1.0.13)
+    https://github.com/codef0rmer/angular-dragdrop
+
+    angular-slideable (no version)
+    https://github.com/EricWVGG/AngularSlideables/blob/master/LICENSE
+
+    angular-toastr (unknown)
+    https://github.com/Foxandxss/angular-toastr/blob/master/LICENSE
+
+    angular-toggle-switch (1.3.0)
+    https://github.com/cgarvis/angular-toggle-switch/blob/master/LICENSE
+
+    angular-ui-bootstrap (1.3.2)
+    https://github.com/angular-ui/bootstrap/blob/master/LICENSE
+
+    angular-ui-tree (2.15.0)
+    https://github.com/angular-ui-tree/angular-ui-tree/blob/master/LICENSE
+
+    Bootstrap (3.3.7)
+    https://getbootstrap.com/
+    https://github.com/twbs/bootstrap/blob/master/LICENSE
+
+    d3-context-menu (0.1.2)
+    https://github.com/patorjk/d3-context-menu/blob/master/LICENSE.txt
+
+    flowchart (No version)
+    https://github.com/ashleydavis/AngularJS-FlowChart/blob/master/LICENSE
+
+    jQuery (3.2.1)
+    https://jquery.org/license/
+
+    jQuery UI (1.11.4)
+    http://jqueryui.com
+    https://github.com/jquery/jquery-ui/blob/master/LICENSE.txt
+
+    Lodash (4.17.4)
+    https://github.com/lodash/lodash/blob/master/LICENSE
+
+
+
+=================================================
+Berkeley Software Distribution
+https://opensource.org/licenses/BSD-3-Clause
+=================================================
+
+The following components are provided under Berkeley Software Distribution:
+
+    D3js (3.5.12 & 4.1.1)
+    https://d3js.org
+
+    d3-shape (1.2.0)
+    https://github.com/d3/d3-shape/blob/master/LICENSE
+
+
+=================================================
+Apache Software License
+https://www.apache.org/licenses/
+=================================================
+
+The following components are provided under Apache Software License:
+
+    angular-toggle-switch-bootstrap (No version)
+    https://github.com/yuraantonov11/angular-bootstrap-toggle-switch
