@@ -83,7 +83,7 @@ let _core_op_lib = [
         name: "Dataset Selection",
         label: "Dataset Selection",
         description: "Get a TS list from a dataset name",
-        family: "Dataset Preparation/Data Selection",
+        family: "Dataset Preparation/Dataset Management",
         outputs: [
             {
                 name: "ts_list",
@@ -154,7 +154,7 @@ let _core_op_lib = [
         name: "Filter",
         label: "Filter",
         description: "Filter TS using metadata",
-        family: "Dataset Preparation/Data Selection",
+        family: "Dataset Preparation/Dataset Management",
         op_id: 2,
         inputs: [
             {
@@ -298,7 +298,7 @@ let _core_op_lib = [
         name: "Manual Selection",
         label: "Manual Selection",
         description: "Manually filter a TS list",
-        family: "Dataset Preparation/Data Selection",
+        family: "Dataset Preparation/Dataset Management",
         op_id: 3,
         inputs: [
             {
@@ -538,7 +538,7 @@ let _core_op_lib = [
         name: "Population Selection",
         label: "Population Selection",
         description: "CSV file ingestion to create a population table",
-        family: "Dataset Preparation/Data Selection",
+        family: "Data Modeling/Supervised Learning",
         op_id: 7,
         parameters: [
             {
@@ -623,7 +623,7 @@ let _core_op_lib = [
         name: "TSFinder",
         label: "TS Finder",
         description: "Find a TS by its TSUID/FID pattern",
-        family: "Dataset Preparation/Data Selection",
+        family: "Dataset Preparation/Dataset Management",
         op_id: 9,
         inputs: [],
         outputs: [
