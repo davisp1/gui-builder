@@ -15,6 +15,9 @@ var destination = 'build';
 // Viztools folder location relative to build path
 var VTPATH = 'viztools'
 
+// Families definition folder location
+var famDir = 'fam';
+
 // Update API endpoints
 gulp.task("set-api-endpoints", function () {
   return gulp.src(`${destination}/js/ikats_api.js`)
@@ -75,7 +78,10 @@ gulp.task('build', function () {
           return file.contents.toString('utf8') + ',';
         }
       }))
-      .pipe(gulp.dest(`${destination}/js/VizModule/`))
+      .pipe(gulp.dest(`${destination}/js/VizModule/`)),
+
+    /* Update families.json */
+    gulp.src(`${famDir}/families.json`).pipe(gulp.dest(`${destination}/js/`))
 
   );
 });
