@@ -84,7 +84,7 @@ angular.module("ikatsapp.controllers").controller("VizController", ["toastr", "$
         });
         self.outputViz = wf.focusedNode.data.outputConnectors[0];
         self.VizMode = self.suggestVizTool(self.outputViz.type);
-        self.debugLoadVt(wf);
+        self.loadVT(wf);
     };
 
     /**
@@ -146,12 +146,10 @@ angular.module("ikatsapp.controllers").controller("VizController", ["toastr", "$
         }
     };
 
-    // Permit onchange load of VizTool in debug mode
-    self.debugLoadVt = function (wfCtrl) {
-        if (self.outputViz) {
-            if (self.isDebugModeActivated() && self.VizMode) {
-                self.engine.addViz(self.VizMode.name, self.outputData(wfCtrl), true);
-            }
+    // Loads a VizTool
+    self.loadVT = function (wfCtrl) {
+        if (self.outputViz && self.VizMode) {
+            self.engine.addViz(self.VizMode.name, self.outputData(wfCtrl), true);
         }
     };
 

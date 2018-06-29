@@ -22,7 +22,7 @@
                 <select ng-model="vizCtrl.outputViz"
                         class="form-control"
                         ng-options="output.label for output in wfCtrl.focusedNode.data.outputConnectors"
-                        ng-change="vizCtrl.VizMode = vizCtrl.suggestVizTool(vizCtrl.outputViz.type);vizCtrl.debugLoadVt(wfCtrl);"
+                        ng-change="vizCtrl.VizMode = vizCtrl.suggestVizTool(vizCtrl.outputViz.type);"
                         style="border-radius:4px;">
                 </select>
             </div>
@@ -31,7 +31,6 @@
                  style="display:inline-block;">
                 <select ng-model="vizCtrl.VizMode"
                         class="form-control"
-                        ng-change="vizCtrl.debugLoadVt(wfCtrl)"
                         ng-options="vt.name for vt in vizCtrl.engine.getAvailableVizTools(vizCtrl.outputViz.type) track by vt.name"
                         style="display: inline-block;width:150px;border-radius:4px;">
                 </select>
@@ -39,7 +38,7 @@
             <button class="btn btn-default"
                     ng-click="vizCtrl.engine.addViz(vizCtrl.VizMode.name,vizCtrl.outputData(wfCtrl),true);"
                     style="display:inline-block;vertical-align:top;height:34px;"
-                    ng-show="(vizCtrl.VizMode && vizCtrl.VizMode !== '') && (vizCtrl.outputViz && vizCtrl.outputViz != '') && !vizCtrl.isDebugModeActivated()">
+                    ng-show="(vizCtrl.VizMode && vizCtrl.VizMode !== '') && (vizCtrl.outputViz && vizCtrl.outputViz != '')">
                 <span class="IKATS_eye glyphicon glyphicon-eye-open"></span>
             </button>
         </div>
