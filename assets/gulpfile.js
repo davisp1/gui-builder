@@ -81,7 +81,7 @@ gulp.task('build', function () {
       .pipe(gulp.dest(`${destination}/js/VizModule/`)),
 
     /* Update families.json */
-    gulp.src(`${famDir}/families.json`).pipe(gulp.dest(`${destination}/js/`))
+    gulp.src(`${famDir}/families.json`).pipe(gulp.dest(destination))
 
   );
 });

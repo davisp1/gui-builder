@@ -252,55 +252,48 @@ angular.module("ikatsapp.controllers").controller("CatalogController", ["toastr"
      */
     self.loadOperators = function (callback, wf) {
         // Create default categories
-        ikats.api.families.list({
-            async: true,
-            success: function (families_results) {
-                families_results.data.forEach(function (cat) {
-                    self.libraryAddCat(cat.label, cat.desc);
-                });
+        $.getJSON("families.json", function (families) {
+            families.forEach(function (cat) {
+                self.libraryAddCat(cat.label, cat.description);
+            });
 
-                // Append Core operators summary
-                BuildCoreOperatorsList();
-                CORE_OPERATORS_LIB.forEach(function (raw_op) {
-                    // Limit each item to the minimum to display to catalog
-                    const op = new OP_INFO(null, raw_op.op_id, false);
+            // Append Core operators summary
+            BuildCoreOperatorsList();
+            CORE_OPERATORS_LIB.forEach(function (raw_op) {
+                // Limit each item to the minimum to display to catalog
+                const op = new OP_INFO(null, raw_op.op_id, false);
+                op.label = raw_op.label;
+                op.algo = "Core operator";
+                op.desc = raw_op.desc;
+                op.family = raw_op.family;
+                const cat = self.libraryAddCat(capitalize(op.family));
+                self.libraryAddOp(cat, op);
+            });
+
+            // Append implementations to operators list
+            const implementations = ikats.api.op.list().data;
+            implementations.forEach(function (raw_op) {
+                if (raw_op.visibility === true) {
+                    const op = new OP_INFO(null, raw_op.id, true);
+                    op.name = raw_op.name;
                     op.label = raw_op.label;
-                    op.algo = "Core operator";
-                    op.desc = raw_op.desc;
-                    op.family = raw_op.family;
-                    const cat = self.libraryAddCat(capitalize(op.family));
+                    op.algo = raw_op.algo;
+                    op.desc = raw_op.description;
+                    op.family = $.grep(families, function (x) {
+                        return capitalize(x.name) === capitalize(raw_op.family);
+                    })[0].label;
+                    const cat = self.libraryAddCat(op.family);
                     self.libraryAddOp(cat, op);
-                });
-
-                // Append implementations to operators list
-                const implementations = ikats.api.op.list().data;
-                implementations.forEach(function (raw_op) {
-                    if (raw_op.visibility === true) {
-                        const op = new OP_INFO(null, raw_op.id, true);
-                        op.name = raw_op.name;
-                        op.label = raw_op.label;
-                        op.algo = raw_op.algo;
-                        op.desc = raw_op.description;
-                        op.family = $.grep(families_results.data, function (x) {
-                            return capitalize(x.name) === capitalize(raw_op.family);
-                        })[0].label;
-                        const cat = self.libraryAddCat(op.family);
-                        self.libraryAddOp(cat, op);
-                    }
-                });
-
-                // Call extra action in callback if defined
-                if (typeof (callback) === "function") {
-                    callback();
                 }
+            });
 
-                wf.refresh();
-
-            },
-            error: function (result) {
-                toastr.error("Can't get algorithm families");
-                console.error("Can't get algorithm families.", result);
+            // Call extra action in callback if defined
+            if (typeof (callback) === "function") {
+                callback();
             }
+
+            wf.refresh();
+
         });
     };
 
