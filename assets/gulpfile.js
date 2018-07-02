@@ -13,7 +13,7 @@ var vtSources = 'fetch-vt';
 var destination = 'build';
 
 // Viztools folder location relative to build path
-var VTPATH = 'viztools'
+var VTPATH = 'viztools';
 
 // Families definition folder location
 var famDir = 'fam';
@@ -31,8 +31,8 @@ gulp.task("set-api-endpoints", function () {
 // Clean former run
 gulp.task("clean", function () {
   return gulp.src(`${destination}/*`, {
-    read: false
-  })
+      read: false
+    })
     .pipe(clean());
 });
 
@@ -60,25 +60,25 @@ gulp.task('build', function () {
 
     /* Update index.html with new JS & CSS */
     gulp.src('src/index.html')
-      .pipe(inject(gulp.src(jsToInclude, {
-        read: false
-      }), {
-          starttag: '<!-- inject:{{ext}} -->',
-          relative: true,
-          ignorePath: `../${destination}/`
-        }))
-      .pipe(gulp.dest(destination)),
+    .pipe(inject(gulp.src(jsToInclude, {
+      read: false
+    }), {
+      starttag: '<!-- inject:{{ext}} -->',
+      relative: true,
+      ignorePath: `../${destination}/`
+    }))
+    .pipe(gulp.dest(destination)),
 
     /* Update VizToolsLibrary.js with new viztools */
     gulp.src('src/js/VizModule/VizToolsLibrary.js')
-      .pipe(inject(gulp.src(`${vtSources}/**/viztool_def.json`), {
-        starttag: '/* inject:json */',
-        endtag: '/* endinject */',
-        transform: function (filepath, file) {
-          return file.contents.toString('utf8') + ',';
-        }
-      }))
-      .pipe(gulp.dest(`${destination}/js/VizModule/`)),
+    .pipe(inject(gulp.src(`${vtSources}/**/viztool_def.json`), {
+      starttag: '/* inject:json */',
+      endtag: '/* endinject */',
+      transform: function (filepath, file) {
+        return file.contents.toString('utf8') + ',';
+      }
+    }))
+    .pipe(gulp.dest(`${destination}/js/VizModule/`)),
 
     /* Update families.json */
     gulp.src(`${famDir}/families.json`).pipe(gulp.dest(destination))
