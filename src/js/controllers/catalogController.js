@@ -19,8 +19,8 @@
 
 /**
  * Controller handling catalog aspects : lists available operators.
- * @class ikats_HMI.Controllers.CatalogController
- * @memberOf ikats_HMI.Controllers
+ * @class IKATS_GUI.Controllers.CatalogController
+ * @memberOf IKATS_GUI.Controllers
  */
 angular.module("ikatsapp.controllers").controller("CatalogController", ["toastr", function (toastr) {
 
@@ -33,7 +33,7 @@ angular.module("ikatsapp.controllers").controller("CatalogController", ["toastr"
      * Catalog of operators
      *
      * @alias library
-     * @memberOf ikats_HMI.Controllers.CatalogController
+     * @memberOf IKATS_GUI.Controllers.CatalogController
      * @type {Array}
      */
     self.library = [];
@@ -42,7 +42,7 @@ angular.module("ikatsapp.controllers").controller("CatalogController", ["toastr"
      * Find the operator matching the criteria
      *
      * @alias searchBoxFilter
-     * @memberOf ikats_HMI.Controllers.CatalogController
+     * @memberOf IKATS_GUI.Controllers.CatalogController
      * @param {Object=} from_cat entry point (sub category) to search into
      * @return {?OP_INFO[]}
      */
@@ -80,7 +80,7 @@ angular.module("ikatsapp.controllers").controller("CatalogController", ["toastr"
      * from_cat allow to specify an entry point (as complete category data)
      *
      * @alias libraryFindCat
-     * @memberOf ikats_HMI.Controllers.CatalogController
+     * @memberOf IKATS_GUI.Controllers.CatalogController
      * @param {String} cat_name the name of the category to find
      * @param {Object=} from_cat entry point (sub category) to search into
      * @return {Object} the added category
@@ -110,7 +110,7 @@ angular.module("ikatsapp.controllers").controller("CatalogController", ["toastr"
      * Find Operator by its Id
      *
      * @alias libraryFindOp
-     * @memberOf ikats_HMI.Controllers.CatalogController
+     * @memberOf IKATS_GUI.Controllers.CatalogController
      *
      * @param {number} op_id Operator identifier (unique duet:[op_id,isAlgo])
      * @param {boolean} isAlgo determines if the operator is an algo or a core operator
@@ -147,7 +147,7 @@ angular.module("ikatsapp.controllers").controller("CatalogController", ["toastr"
      * from_cat allow to specify an entry point (as complete category data)
      *
      * @alias libraryAddCat
-     * @memberOf ikats_HMI.Controllers.CatalogController
+     * @memberOf IKATS_GUI.Controllers.CatalogController
      *
      * @param {String} cat_name Name of the category to create
      * @param {?String=} desc Description of the category to create
@@ -215,7 +215,7 @@ angular.module("ikatsapp.controllers").controller("CatalogController", ["toastr"
      * Append an operator to the catalog
      *
      * @alias libraryAddOp
-     * @memberOf ikats_HMI.Controllers.CatalogController
+     * @memberOf IKATS_GUI.Controllers.CatalogController
      *
      * @param {Object} cat Category to append the operator to
      * @param {OP_INFO} op Object defining the minimum information to locate and display operator:
@@ -246,9 +246,9 @@ angular.module("ikatsapp.controllers").controller("CatalogController", ["toastr"
      * - Customized operators (all operators modified by user)
      *
      * @alias loadOperators
-     * @memberOf ikats_HMI.Controllers.CatalogController
+     * @memberOf IKATS_GUI.Controllers.CatalogController
      * @param {function=} callback Optional callback function
-     * @param {ikats_HMI.Controllers.WorkflowController} wf Workflow controller reference
+     * @param {IKATS_GUI.Controllers.WorkflowController} wf Workflow controller reference
      */
     self.loadOperators = function (callback, wf) {
         // Create default categories

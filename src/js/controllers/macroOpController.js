@@ -19,8 +19,8 @@
 
 /**
  * Controller handling macro-operators and custom-operators aspects : lists them and permits CRUD on them
- * @class ikats_HMI.Controllers.MacroOpController
- * @memberOf ikats_HMI.Controllers
+ * @class IKATS_GUI.Controllers.MacroOpController
+ * @memberOf IKATS_GUI.Controllers
  */
 angular.module("ikatsapp.controllers").controller("MacroOpController", ["toastr", "$scope", function (toastr, $scope) {
 
@@ -45,7 +45,7 @@ angular.module("ikatsapp.controllers").controller("MacroOpController", ["toastr"
      * (Refresh the binds (used after async requests))
      *
      * @alias refresh
-     * @memberOf ikats_HMI.Controllers.MacroOpController
+     * @memberOf IKATS_GUI.Controllers.MacroOpController
      * @type {function}
      */
     self.refresh = $scope.refresh;
@@ -54,8 +54,8 @@ angular.module("ikatsapp.controllers").controller("MacroOpController", ["toastr"
      * Saves the selection as macro operator in backend
      *
      * @alias saveSelection
-     * @memberOf ikats_HMI.Controllers.MacroOpController
-     * @param {ikats_HMI.Controllers.WorkflowController} wf workflow controller reference
+     * @memberOf IKATS_GUI.Controllers.MacroOpController
+     * @param {IKATS_GUI.Controllers.WorkflowController} wf workflow controller reference
      */
     self.saveSelection = function (wf) {
         let selection = wf.getSelection();
@@ -134,7 +134,7 @@ angular.module("ikatsapp.controllers").controller("MacroOpController", ["toastr"
      * List the available macro and custom OPs
      *
      * @alias list
-     * @memberOf ikats_HMI.Controllers.MacroOpController
+     * @memberOf IKATS_GUI.Controllers.MacroOpController
      */
     self.list = function () {
         ikats.api.mo.list({
@@ -153,7 +153,7 @@ angular.module("ikatsapp.controllers").controller("MacroOpController", ["toastr"
      * Method to prepare a macro for deletion
      *
      * @alias confirmDel
-     * @memberOf ikats_HMI.Controllers.MacroOpController
+     * @memberOf IKATS_GUI.Controllers.MacroOpController
      * @param {{}} macro descriptor of the macro operator to delete
      */
     self.confirmDel = function (macro) {
@@ -164,7 +164,7 @@ angular.module("ikatsapp.controllers").controller("MacroOpController", ["toastr"
      * Method to delete a MO
      *
      * @alias del
-     * @memberOf ikats_HMI.Controllers.MacroOpController
+     * @memberOf IKATS_GUI.Controllers.MacroOpController
      */
     self.del = function () {
         ikats.api.mo.del({
