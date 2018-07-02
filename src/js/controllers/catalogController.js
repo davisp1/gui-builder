@@ -251,8 +251,8 @@ angular.module("ikatsapp.controllers").controller("CatalogController", ["toastr"
      * @param {IKATS_GUI.Controllers.WorkflowController} wf Workflow controller reference
      */
     self.loadOperators = function (callback, wf) {
-        // Create default categories
         $.getJSON("families.json", function (families) {
+            // Create default categories
             families.forEach(function (cat) {
                 self.libraryAddCat(cat.label, cat.description);
             });
