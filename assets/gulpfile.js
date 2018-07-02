@@ -78,11 +78,7 @@ gulp.task('build', function () {
         return file.contents.toString('utf8') + ',';
       }
     }))
-    .pipe(gulp.dest(`${destination}/js/VizModule/`)),
-
-    /* Update families.json */
-    gulp.src(`${famDir}/families.json`).pipe(gulp.dest(destination))
-
+    .pipe(gulp.dest(`${destination}/js/VizModule/`))
   );
 });
 
@@ -93,7 +89,11 @@ gulp.task('prepare', function () {
     gulp.src(['./src/**/*']).pipe(gulp.dest(destination)),
 
     /* Copy all Viztools to build folder */
-    gulp.src([`./${vtSources}/**`]).pipe(gulp.dest(`${destination}/${VTPATH}/`))
+    gulp.src([`./${vtSources}/**`]).pipe(gulp.dest(`${destination}/${VTPATH}/`)),
+
+    /* Update families.json */
+    gulp.src(`${famDir}/families.json`).pipe(gulp.dest(destination))
+
   );
 });
 
