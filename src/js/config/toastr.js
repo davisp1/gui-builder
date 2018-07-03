@@ -19,8 +19,8 @@
 
 /**
  * Configure the container of the toast-messages
- * @class ikats_HMI.Config.toastrConfig
- * @memberOf ikats_HMI.Config
+ * @class IKATS_GUI.Config.toastrConfig
+ * @memberOf IKATS_GUI.Config
  */
 angular.module("ikatsapp.config").config(["toastrConfig", function (toastrConfig) {
     angular.extend(toastrConfig, {
