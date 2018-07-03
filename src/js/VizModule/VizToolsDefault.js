@@ -13,23 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // Define default VizTool name to suggest to the user for each handled type
-// output type : VizToolImplementation
 VizToolsDefault = {
-    ts_list: "TsTable",
-    ds_name: "Text",
-    tsuid_list: "TsTable",
-    pattern: "pattern",
-    randproj: "random_projection",
-    md_list: "MDList",
-    text: "Text",
-    percentage: "Percentage",
-    correlation_by_context: "D3CurveNonTemporal",
-    table: "Table",
-    correlation_dataset: "Correlation matrix",
-    ts_bucket: "Curve",
-    SAX_result: "SAX",
-    kmeans_mds: "Clusters"
+    "ts_list": "TsTable",
+    "ds_name": "Text",
+    "tsuid_list": "TsTable",
+    "pattern": "pattern",
+    "randproj": "random_projection",
+    "md_list": "MDList",
+    "text": "Text",
+    "percentage": "Percentage",
+    "correlation_by_context": "D3CurveNonTemporal",
+    "table": "Table",
+    "correlation_dataset": "Correlation matrix",
+    "ts_bucket": "Curve",
+    "SAX_result": "SAX",
+    "kmeans_mds": "Clusters"
 };
 
 /**
@@ -40,12 +40,11 @@ VizToolsDefault = {
 const getDefaultVizTool = function (type) {
     let viztoolName = VizToolsDefault[type];
     if (!viztoolName) {
-        let VTcandidates = VizToolsLibrary.filter(function(vt){
+        let VTcandidates = VizToolsLibrary.filter(function (vt) {
             return (vt.types.indexOf(type) !== -1 ||
-                (!vt.types.length && (!vt.debugModeOnly || window.CURRENT_IKATS_MODE === IKATS_MODES.DEBUG)
-            ));
+                (!vt.types.length && (!vt.debugModeOnly || window.CURRENT_IKATS_MODE === IKATS_MODES.DEBUG)));
         });
-        if (VTcandidates.length){
+        if (VTcandidates.length) {
             return VTcandidates[0];
         } else {
             return null;
