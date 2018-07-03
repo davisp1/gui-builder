@@ -1473,7 +1473,7 @@ let _core_op_lib = [
         name: "output_builder",
         label: "Output Builder",
         description: "Build a custom output data",
-        family: window.DEVELOPER_FAMILY,
+        family: "Uncategorized",
         outputs: [
             {
                 name: "out",
