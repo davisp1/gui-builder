@@ -23,8 +23,8 @@
 /**
  * Main Controller :
  * Controller handling workflow purposes : CRUD operations over workflows, and interaction with other modules.
- * @class ikats_HMI.Controllers.WorkflowController
- * @memberOf ikats_HMI.Controllers
+ * @class IKATS_GUI.Controllers.WorkflowController
+ * @memberOf IKATS_GUI.Controllers
  */
 angular.module("ikatsapp.controllers").controller("WorkflowController", [
   "$scope", "$interval", "toastr",
@@ -36,7 +36,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * toastr of the application
      *
      * @alias toastr
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @type {*}
      */
     self.toastr = toastr;
@@ -44,7 +44,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
     /**
      * Translation of the workspace induced by zoomIn & zoomOut
      *
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      *
      * @alias translate
      * @type {Object}
@@ -59,7 +59,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Scale of the workflow
      *
      * @alias scale
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @type {number}
      */
     self.scale = 1;
@@ -107,7 +107,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * - activate demo mode with CTRL+SHIFT+D
      *
      * @alias keyDown
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @param {event} evt javascript event firing function
      */
     self.keyDown = function(evt) {
@@ -136,7 +136,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * - 'escape' : deselect all
      *
      * @alias keyUp
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @param {event} evt javascript event firing function
      */
     self.keyUp = function(evt) {
@@ -168,7 +168,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Delete selected nodes and connections.
      *
      * @alias deleteSelected
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      */
     self.deleteSelected = function() {
       self.chartViewModel.deleteSelected();
@@ -178,7 +178,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Check if a node is selected in the flowchart
      *
      * @alias checkSelected
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      */
     self.checkSelected = function() {
       //remove focus of the eventual input when clicking the workflow
@@ -205,7 +205,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Create the view-model for the chart and attach to the scope.
      *
      * @alias chartViewModel
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @type {flowchart.ChartViewModel}
      */
     self.chartViewModel = new flowchart.ChartViewModel(chartDataModel);
@@ -221,7 +221,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * - description : description of the workflow that will be saved (may be initialized when loading workflow)
      *
      * @alias current
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @type {{id, name, description}}
      */
     self.current = {
@@ -234,7 +234,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Getter on current selection
      *
      * @alias getSelection
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @returns {{}} model of the selection (contains :
      *      nodes - the list of nodes
      *      connections - the list of connections)
@@ -256,7 +256,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Checks if the selection is consistent :
      * @returns {boolean} true if the current selection contains at least 1 node, else, returns false
      * @alias isSelectionConsistent
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      */
     self.isSelectionConsistent = function() {
       return self.getSelection().nodes.length > 0;
@@ -266,8 +266,8 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Instantiate a new workflow with only 1 operator
      *
      * @alias new
-     * @memberOf ikats_HMI.Controllers.WorkflowController
-     * @param {ikats_HMI.Controllers.CatalogController} catalog controller reference
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
+     * @param {IKATS_GUI.Controllers.CatalogController} catalog controller reference
      */
     self.new = function(catalog) {
       // Remove pending queries
@@ -293,7 +293,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Clear the workflow and starts a new one
      *
      * @alias clear
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      */
     self.clear = function(catalog) {
       self.chartViewModel.selectAll();
@@ -310,7 +310,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Saves a workflow
      *
      * @alias save
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @param {boolean} update define if saving is over an existing workflow (true : delete old reference, false : don't)
      */
     self.save = function(update) {
@@ -374,25 +374,25 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
     /**
      * Workflow management information
      * @type {{}}
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      */
     self.wf = {};
 
     /**
      * Current filter query
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      */
     self.wf.query = "";
 
     /**
      * All data available since the last refresh
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      */
     self.wf.originalData = null;
 
     /**
      * Data matching the current query
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      */
     self.wf.data = null;
 
@@ -415,7 +415,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
     /**
      * List the available workflows
      *
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @alias list
      */
     self.list = function() {
@@ -439,7 +439,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Method to load a workflow
      *
      * @alias load
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @param {Number} id The Id of the workflow
      */
     self.load = function(id) {
@@ -529,7 +529,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Append a macro OP or custom OP to wf instance
      *
      * @alias appendMacro
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @param {Number} id the ID of the macro to append
      */
     self.appendMacro = function(id) {
@@ -616,7 +616,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Method to prepare workflow deletion
      *
      * @alias confirmDelete
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @param {{}} workflow the workflow object to delete
      */
     self.confirmDelete = function(workflow) {
@@ -628,7 +628,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * NB : use of confirmDelete is required before calling this function
      *
      * @alias del
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      */
     self.del = function() {
       ikats.api.wf.del({
@@ -654,7 +654,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Toggle opening of an ui tree component
      *
      * @alias toggle
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @param item a ui tree component reference
      */
     self.toggle = function(item) {
@@ -665,7 +665,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Run selected operator
      *
      * @alias runOnce
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      */
     self.runOnce = function() {
       const nodeToRun = self.focusedNode;
@@ -682,7 +682,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Append an operator (can also be a macro operator or a custom operator)
      *
      * @alias appendToWorkflow
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @param {{}} thing the object representing (macro/custom/normal) operator to add to workflow
      */
     self.appendToWorkflow = function(thing) {
@@ -755,7 +755,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * The position of the mouse in the flowchart component
      *
      * @alias relativePosition
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @type {{x: number, y: number}}
      */
     self.relativePosition = {
@@ -767,7 +767,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Update the relativePosition Variable
      *
      * @alias updateCoordinates
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @param {event} $event the javascript event firing function
      */
     self.updateCoordinates = function($event) {
@@ -784,7 +784,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Remove the given element from the md_filter template
      *
      * @alias delItem
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @param {Array} list a list of md_params
      * @param {String} elem the value of a md_param
      */
@@ -799,8 +799,8 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Global page initialization, will call initiation of a new workflow
      *
      * @alias init
-     * @memberOf ikats_HMI.Controllers.WorkflowController
-     * @param {ikats_HMI.Controllers.CatalogController} catalog a Catalog controller reference
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
+     * @param {IKATS_GUI.Controllers.CatalogController} catalog a Catalog controller reference
      */
     self.init = function(catalog) {
       // Init a new workflow
@@ -813,7 +813,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Returns the value of the previous node linked to the input
      *
      * @alias getSourceData
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      *
      * @param {number} node_id Id of the node to retrieve data from
      * @param {string} input_name name of the input to get data from
@@ -852,7 +852,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Get the result corresponding to a resource Id
      *
      * @alias getDataFromRID
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @param {Number} rid the resource Id of the result of a backend computation
      */
     self.getDataFromRID = function(rid) {
@@ -864,7 +864,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Zoom into workflow (max 3 times the initial size)
      *
      * @alias zoomIn
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      */
     self.zoomIn = function() {
       const factor = 1.25;
@@ -882,7 +882,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Zoom out workflow (min 0.4 time the initial size)
      *
      * @alias zoomOut
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      */
     self.zoomOut = function() {
       const factor = 0.8; // =1/1.25
@@ -900,7 +900,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Compute the style of an object that should be disabled when workflow contains no selection
      *
      * @alias isDisabledStyle
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @returns {*} a CSS styling object
      */
     self.isDisabledStyle = function() {
@@ -916,8 +916,8 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Helpers part of the scope, used by template calls
      *
      * @alias helpers
-     * @class ikats_HMI.Controllers.WorkflowController.helpers
-     * @memberOf ikats_HMI.Controllers.WorkflowController
+     * @class IKATS_GUI.Controllers.WorkflowController.helpers
+     * @memberOf IKATS_GUI.Controllers.WorkflowController
      * @type {{}}
      */
     self.helpers = {};
@@ -926,7 +926,7 @@ angular.module("ikatsapp.controllers").controller("WorkflowController", [
      * Wrapper for the math min function
      *
      * @alias min
-     * @memberOf ikats_HMI.Controllers.WorkflowController.helpers
+     * @memberOf IKATS_GUI.Controllers.WorkflowController.helpers
      * @param {number} x first value
      * @param {number} y second value
      * @returns {number} the lowest value

@@ -15,8 +15,8 @@
  */
 /**
  * Listen mouse wheel events and permits callbacks according "direction" (up/down)
- * @class ikats_HMI.Directives.wheelListener
- * @memberOf ikats_HMI.Directives
+ * @class IKATS_GUI.Directives.wheelListener
+ * @memberOf IKATS_GUI.Directives
  */
 angular.module("ikatsapp.directives").directive("wheelListener", function () {
     return function (scope, element, attrs) {

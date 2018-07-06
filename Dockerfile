@@ -3,7 +3,7 @@ FROM node:9.11.1-jessie
 LABEL license="Apache License, Version 2.0"
 LABEL copyright="CS Systèmes d'Information"
 LABEL maintainer="contact@ikats.org"
-LABEL version="0.8.0"
+LABEL version="0.9.0"
 
 # Adding jessie backport for python3-git
 RUN echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/backport.list
@@ -21,7 +21,7 @@ RUN apt-get update \
 WORKDIR /app
 
 # Creating app directories
-RUN mkdir -p  /app/src /app/build /app/fetch-vt /app/local
+RUN mkdir -p  /app/src /app/build /app/fetch-vt /app/local /app/fam
 
 # Install node dependencies
 ADD assets/package.json /app/
@@ -38,6 +38,7 @@ VOLUME /app/build
 VOLUME /app/fetch-vt
 VOLUME /app/src
 VOLUME /app/local
+VOLUME /app/fam
 
 # Do git clone no matter the validity of the certificate
 ENV GIT_SSL_NO_VERIFY true

@@ -19,8 +19,8 @@
 
 /**
  * Controller handling visualization purposes : management of VizEngine and VizTools.
- * @class ikats_HMI.Controllers.VizController
- * @memberOf ikats_HMI.Controllers
+ * @class IKATS_GUI.Controllers.VizController
+ * @memberOf IKATS_GUI.Controllers
  */
 angular.module("ikatsapp.controllers").controller("VizController", ["toastr", "$scope", function (toastr, $scope) {
 
@@ -54,8 +54,8 @@ angular.module("ikatsapp.controllers").controller("VizController", ["toastr", "$
      * Checks if the operator has results to display (if any output contains data)
      *
      * @alias isVizAvailable
-     * @memberOf ikats_HMI.Controllers.VizController
-     * @param {ikats_HMI.Controllers.WorkflowController} wf workflow controller reference
+     * @memberOf IKATS_GUI.Controllers.VizController
+     * @param {IKATS_GUI.Controllers.WorkflowController} wf workflow controller reference
      * @param {{}} node operator description, containing op_info
      * @returns {boolean} true if visualization should be available, false else.
      */
@@ -75,7 +75,7 @@ angular.module("ikatsapp.controllers").controller("VizController", ["toastr", "$
 
     /**
      * Collect eventual input data (when input is passed by RID)
-     * @param {ikats_HMI.Controllers.WorkflowController} wf workflow controller reference
+     * @param {IKATS_GUI.Controllers.WorkflowController} wf workflow controller reference
      * @param {{}} node operator description, containing op_info
      */
     self.collectInputs = function (wf, node) {
@@ -84,7 +84,7 @@ angular.module("ikatsapp.controllers").controller("VizController", ["toastr", "$
         });
         self.outputViz = wf.focusedNode.data.outputConnectors[0];
         self.VizMode = self.suggestVizTool(self.outputViz.type);
-        self.debugLoadVt(wf);
+        self.loadVT(wf);
     };
 
     /**
@@ -100,7 +100,7 @@ angular.module("ikatsapp.controllers").controller("VizController", ["toastr", "$
      * Reset VizModule state (flush VizTool stack, reset visualization modes)
      *
      * @alias resetVizStates
-     * @memberOf ikats_HMI.Controllers.VizController
+     * @memberOf IKATS_GUI.Controllers.VizController
      */
     self.resetVizStates = function () {
         // Reset VizToolStack (bread-crumb)
@@ -117,8 +117,8 @@ angular.module("ikatsapp.controllers").controller("VizController", ["toastr", "$
      * Get output data available for selected operator in wf
      *
      * @alias outputData
-     * @memberOf ikats_HMI.Controllers.VizController
-     * @param {ikats_HMI.Controllers.WorkflowController} wf workflow controller reference
+     * @memberOf IKATS_GUI.Controllers.VizController
+     * @param {IKATS_GUI.Controllers.WorkflowController} wf workflow controller reference
      * @returns {*} false if no data is found, data else.
      */
     self.outputData = function (wf) {
@@ -146,12 +146,10 @@ angular.module("ikatsapp.controllers").controller("VizController", ["toastr", "$
         }
     };
 
-    // Permit onchange load of VizTool in debug mode
-    self.debugLoadVt = function (wfCtrl) {
-        if (self.outputViz) {
-            if (self.isDebugModeActivated() && self.VizMode) {
-                self.engine.addViz(self.VizMode.name, self.outputData(wfCtrl), true);
-            }
+    // Loads a VizTool
+    self.loadVT = function (wfCtrl) {
+        if (self.outputViz && self.VizMode) {
+            self.engine.addViz(self.VizMode.name, self.outputData(wfCtrl), true);
         }
     };
 
@@ -164,7 +162,7 @@ angular.module("ikatsapp.controllers").controller("VizController", ["toastr", "$
      * VizTool part of the scope : regroup helpers to get information over viztools implementations
      *
      * @alias viztool
-     * @memberOf ikats_HMI.Controllers.VizController
+     * @memberOf IKATS_GUI.Controllers.VizController
      * @type {Object}
      */
     self.viztool = {

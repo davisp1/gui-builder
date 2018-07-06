@@ -19,8 +19,8 @@
 
 /**
  * Configure the UI tree (operator library) to set the nodes collapsed by default
- * @class ikats_HMI.Config.treeConfig
- * @memberOf ikats_HMI.Config
+ * @class IKATS_GUI.Config.treeConfig
+ * @memberOf IKATS_GUI.Config
  */
 angular.module("ikatsapp.config").config(["treeConfig", function (treeConfig) {
     treeConfig.defaultCollapsed = true;

@@ -19,8 +19,8 @@
 
 /**
  * Filter to convert raw date (in ms) to format like "2h 5min 45s"
- * @class ikats_HMI.Filters.ms2hms
- * @memberOf ikats_HMI.Filters
+ * @class IKATS_GUI.Filters.ms2hms
+ * @memberOf IKATS_GUI.Filters
  */
 angular.module("ikatsapp.filters").filter("ms2hms", function () {
     return function (input) {

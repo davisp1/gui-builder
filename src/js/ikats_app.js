@@ -19,30 +19,30 @@
 
 /**
  * Definition of the angular application ikatsapp
- * @namespace ikats_HMI
+ * @namespace IKATS_GUI
  */
 
 /**
- * @class ikats_HMI.Controllers
- * @memberOf ikats_HMI
+ * @class IKATS_GUI.Controllers
+ * @memberOf IKATS_GUI
  */
 angular.module('ikatsapp.controllers', []);
 
 /**
- * @class ikats_HMI.Filters
- * @memberOf ikats_HMI
+ * @class IKATS_GUI.Filters
+ * @memberOf IKATS_GUI
  */
 angular.module("ikatsapp.filters", []);
 
 /**
- * @class ikats_HMI.Config
- * @memberOf ikats_HMI
+ * @class IKATS_GUI.Config
+ * @memberOf IKATS_GUI
  */
 angular.module("ikatsapp.config", []);
 
 /**
- * @class ikats_HMI.Directives
- * @memberOf ikats_HMI
+ * @class IKATS_GUI.Directives
+ * @memberOf IKATS_GUI
  */
 angular.module("ikatsapp.directives", []);
 

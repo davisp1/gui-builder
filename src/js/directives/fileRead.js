@@ -15,8 +15,8 @@
  */
 /**
  * Open file for reading in input type file parameter
- * @class ikats_HMI.Directives.fileread
- * @memberOf ikats_HMI.Directives
+ * @class IKATS_GUI.Directives.fileread
+ * @memberOf IKATS_GUI.Directives
  */
 angular.module("ikatsapp.directives").directive("fileread", [function () {
     return {
