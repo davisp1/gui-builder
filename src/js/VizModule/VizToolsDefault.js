@@ -16,20 +16,21 @@
 
 // Define default VizTool name to suggest to the user for each handled type
 VizToolsDefault = {
-    "ts_list": "TsTable",
-    "ds_name": "Text",
-    "tsuid_list": "TsTable",
-    "pattern": "pattern",
-    "randproj": "random_projection",
-    "md_list": "MDList",
-    "text": "Text",
-    "percentage": "Percentage",
     "correlation_by_context": "D3CurveNonTemporal",
-    "table": "Table",
     "correlation_dataset": "Correlation matrix",
-    "ts_bucket": "Curve",
+    "ds_name": "Text",
+    "kmeans_mds": "Clusters",
+    "md_list": "MDList",
+    "pattern": "pattern",
+    "percentage": "Percentage",
+    "randproj": "random_projection",
     "SAX_result": "SAX",
-    "kmeans_mds": "Clusters"
+    "table": "Table",
+    "tdt": "Text",
+    "text": "Text",
+    "ts_bucket": "Curve",
+    "ts_list": "TsTable",
+    "tsuid_list": "TsTable"
 };
 
 /**
