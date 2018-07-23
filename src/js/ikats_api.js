@@ -15,7 +15,7 @@
  */
 "use strict";
 /**
- * @file Library to connect to Ikats REST API
+ * @file Library to connect to IKATS REST API
  */
 
 /**
@@ -30,7 +30,7 @@
 
 
 /**
- * Ikats root level object
+ * IKATS root level object
  * @namespace ikats
  */
 const ikats = {
@@ -119,9 +119,9 @@ const ikats = {
 };
 
 /**
- * Ikats global constants
+ * IKATS global constants
  **********************************************************************************************************************/
-// Root address of the common Ikats API to connect to
+// Root address of the common IKATS API to connect to
 ikats.constants.tomee_addr = "127.0.0.1:8081";
 ikats.constants.gunicorn_addr = "127.0.0.1:8000";
 ikats.constants.tomcat_addr = "127.0.0.1:8080";
@@ -141,7 +141,7 @@ ikats.constants.simulate_algorithms = false;
 
 
 /**
- * Ikats common functions
+ * IKATS common functions
  */
 
 /**
@@ -347,7 +347,7 @@ ikats.common.default_params = function() {
 };
 
 /**
- * Ikats API
+ * IKATS API
  * =========
  *
  * Common parameters:
@@ -356,11 +356,11 @@ ikats.common.default_params = function() {
  *    - async: The call to the API can be blocking (synchronous) or not (asynchronous). The async mode allow the user to
  *             do other actions while this one is running.
  *             Once this action is done, the method will call the corresponding callbacks (success, error, complete)
- *    - success: Only in async mode. This callback is called when Ikats REST API returns a HTTP status code 2XX
+ *    - success: Only in async mode. This callback is called when IKATS REST API returns a HTTP status code 2XX
  *               The parameters of the callback are:
  *               - The HTTP xhr object
  *               - The result (body)
- *    - error: Only in async mode. This callback is called when Ikats REST API returns a HTTP status code 4XX or 5XX
+ *    - error: Only in async mode. This callback is called when IKATS REST API returns a HTTP status code 4XX or 5XX
  *             The parameters of the callback is:
  *             - The HTTP xhr object
  *    - complete: Only in async mode. This optional callback is called every time after success or error.
@@ -4362,5 +4362,5 @@ ikats.api.ingest.status = function(p_args) {
 
 };
 
-// Allow bundles from contributions to access Ikats API through window object
+// Allow bundles from contributions to access IKATS API through window object
 window.ikats = ikats;
