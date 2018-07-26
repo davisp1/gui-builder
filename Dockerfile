@@ -3,7 +3,7 @@ FROM node:9.11.1-jessie
 LABEL license="Apache License, Version 2.0"
 LABEL copyright="CS Systèmes d'Information"
 LABEL maintainer="contact@ikats.org"
-LABEL version="0.9.0"
+LABEL version="0.9.1"
 
 # Adding jessie backport for python3-git
 RUN echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/backport.list
