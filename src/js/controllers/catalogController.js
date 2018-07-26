@@ -241,7 +241,7 @@ angular.module("ikatsapp.controllers").controller("CatalogController", ["toastr"
     /**
      * Load and build the list of all available operators.
      * this method will merge both sources:
-     * - Ikats algorithms (also known as catalog)
+     * - IKATS algorithms (also known as catalog)
      * - op.coreOperators (all operators that are not algorithms)
      * - Customized operators (all operators modified by user)
      *

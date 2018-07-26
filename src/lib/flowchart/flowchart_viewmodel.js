@@ -181,7 +181,7 @@ function isAllowedConnection(from, to) {
             this.data.progress++;
         };
 
-        //IKATS Specific
+        // IKATS Specific
         this.isVizAvailable = function () {
             for (let i = 0; i < nodeView.outputConnectors.length; i++) {
                 let connector = nodeView.outputConnectors[i].data;

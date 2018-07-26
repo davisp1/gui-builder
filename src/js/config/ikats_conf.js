@@ -27,7 +27,7 @@ IKATS_MODES = {
 // Family name containing all the developers useful operators
 window.DEVELOPER_FAMILY = "Developers";
 
-// Ikats Debug mode Flag
+// IKATS Debug mode Flag
 window.CURRENT_IKATS_MODE = IKATS_MODES.PROD;
 
 /**

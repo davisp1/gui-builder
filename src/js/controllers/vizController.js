@@ -89,7 +89,7 @@ angular.module("ikatsapp.controllers").controller("VizController", ["toastr", "$
 
     /**
      * Permits suggesting a vizTool according to an output
-     * @param type the ikats functional type used for suggesting VizTool
+     * @param type the IKATS functional type used for suggesting VizTool
      * @returns {*} full details of the suggested VizTool
      */
     self.suggestVizTool = function (type) {

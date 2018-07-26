@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// N.B : Node is the term used by the library Angular-Flowchart for referencing the boxes, in Ikats,
+// N.B : Node is the term used by the library Angular-Flowchart for referencing the boxes, in IKATS,
 // these boxes are called operators, so both terms are visible in code
 
 /**
